@@ -9,19 +9,18 @@ from datasets import load_dataset, get_dataset_config_names
 import os
 
 
-def check_config_cache_status(dataset_name, config_name):
+def check_config_cache_status(dataset_name, config_name, cache_dir):
     """
     Check if a specific config is cached locally
     
     Args:
         dataset_name: Name of the dataset (e.g., 'hao-li/AIDev')
         config_name: Configuration name
+        cache_dir: Local cache directory path
     
     Returns:
         tuple: (is_cached: bool, cache_path: str or None)
     """
-    cache_dir = os.path.expanduser("~/.cache/huggingface/datasets")
-    
     if not os.path.exists(cache_dir):
         return False, None
     
@@ -42,7 +41,7 @@ def check_config_cache_status(dataset_name, config_name):
 
 def load_dataset_step(dataset_state, config_name='pull_request', current_phase='Phase 1'):
     """
-    Step 1: Load dataset from HuggingFace with cache detection
+    Step 1: Load dataset from HuggingFace with local cache
     
     Args:
         dataset_state: Dictionary to store dataset and metadata
@@ -59,23 +58,33 @@ def load_dataset_step(dataset_state, config_name='pull_request', current_phase='
     logger.info("-"*70)
     
     dataset_name = "hao-li/AIDev"
+    
+    # Use local cache directory in project folder
+    local_cache_dir = os.path.join(os.getcwd(), '.cache', 'huggingface', 'datasets')
+    
     logger.info(f"Dataset: {dataset_name}")
     logger.info(f"Config: {config_name}")
+    logger.info(f"Cache location: {local_cache_dir}")
     
-    # Check if this specific config is cached
-    is_cached, cache_path = check_config_cache_status(dataset_name, config_name)
+    # Check if this specific config is cached locally
+    is_cached, cache_path = check_config_cache_status(dataset_name, config_name, local_cache_dir)
     
     if is_cached:
-        logger.info(f"✓ Config '{config_name}' found in cache - loading from disk...")
+        logger.info(f"✓ Config '{config_name}' found in local cache - loading from disk...")
     else:
         logger.info(f"Downloading config '{config_name}' from HuggingFace...")
         logger.info("  (First download may take a minute)")
+        logger.info(f"  Will be cached to: {local_cache_dir}")
     
     logger.info("")
     
     try:
-        # Load dataset with specific config
-        dataset = load_dataset(dataset_name, config_name)
+        # Load dataset with specific config and local cache directory
+        dataset = load_dataset(
+            dataset_name, 
+            config_name,
+            cache_dir=local_cache_dir
+        )
         
         logger.info("✓ Dataset loaded successfully!")
         logger.info(f"  Available splits: {list(dataset.keys())}")
@@ -99,6 +108,7 @@ def load_dataset_step(dataset_state, config_name='pull_request', current_phase='
             dataset_state['metadata'] = {}
         
         dataset_state['metadata']['dataset_name'] = dataset_name
+        dataset_state['metadata']['cache_dir'] = local_cache_dir
         dataset_state['metadata']['loaded_configs'] = list(dataset_state['configs'].keys())
         dataset_state['metadata'][f'{config_name}_records'] = total_records
         dataset_state['metadata'][f'{config_name}_splits'] = list(dataset.keys())

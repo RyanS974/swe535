@@ -1,0 +1,86 @@
+======================================================================
+MSR 2026 - Question 1: How do Agentic-PRs change code?
+Statistical Analysis Report
+======================================================================
+
+----------------------------------------------------------------------
+DATASET TOTALS (Across All PRs)
+----------------------------------------------------------------------
+
+Total PRs analyzed: 33,596
+Total additions: 69,337,968 lines
+Total deletions: 39,601,070 lines
+Total files touched: 442,618 files
+
+----------------------------------------------------------------------
+PER-PR STATISTICS: ADDITIONS
+----------------------------------------------------------------------
+
+Mean: 2063.9 lines
+Median: 72.0 lines
+Std Dev: 28568.2
+Min: 0 lines
+Max: 2,591,290 lines
+
+Percentiles:
+  25th: 18.0 lines
+  50th: 72.0 lines
+  75th: 254.0 lines
+  90th: 1214.0 lines
+  95th: 3743.0 lines
+
+----------------------------------------------------------------------
+PER-PR STATISTICS: DELETIONS
+----------------------------------------------------------------------
+
+Mean: 1178.7 lines
+Median: 10.0 lines
+Std Dev: 20564.8
+Min: 0 lines
+Max: 2,040,393 lines
+
+Percentiles:
+  25th: 1.0 lines
+  50th: 10.0 lines
+  75th: 65.0 lines
+  90th: 411.5 lines
+  95th: 1481.5 lines
+
+----------------------------------------------------------------------
+PER-PR STATISTICS: FILES TOUCHED
+----------------------------------------------------------------------
+
+Mean: 13.2 files
+Median: 2.0 files
+Std Dev: 44.4
+Min: 0 files
+Max: 1,641 files
+
+Percentiles:
+  25th: 1.0 files
+  50th: 2.0 files
+  75th: 7.0 files
+  90th: 22.0 files
+  95th: 58.0 files
+
+----------------------------------------------------------------------
+PR SIZE DISTRIBUTION
+----------------------------------------------------------------------
+
+Size categories based on lines added:
+  XS: < 10 lines
+  S:  10-100 lines
+  M:  100-500 lines
+  L:  500-1,000 lines
+  XL: > 1,000 lines
+
+Distribution:
+  XS: 6,129 PRs (18.2%)
+  S: 13,060 PRs (38.9%)
+  M: 8,818 PRs (26.2%)
+  L: 1,841 PRs (5.5%)
+  XL: 3,748 PRs (11.2%)
+
+======================================================================
+END OF REPORT
+======================================================================

@@ -1,0 +1,485 @@
+2025-10-07 16:43:26 - INFO - ======================================================================
+2025-10-07 16:43:26 - INFO - Logging initialized - Output to console and msr_analysis.log
+2025-10-07 16:43:26 - INFO - ======================================================================
+2025-10-07 16:43:27 - INFO - ======================================================================
+2025-10-07 16:43:27 - INFO - PHASE 1: DATASET EXPLORATION
+2025-10-07 16:43:27 - INFO - ======================================================================
+2025-10-07 16:43:27 - INFO - This phase will:
+2025-10-07 16:43:27 - INFO -   1. Load dataset from HuggingFace (or cache)
+2025-10-07 16:43:27 - INFO -   2. Understand the dataset schema
+2025-10-07 16:43:27 - INFO -   3. Identify PR metrics fields (additions/deletions/files)
+2025-10-07 16:43:27 - INFO -   4. Check data quality
+2025-10-07 16:43:27 - INFO - 
+2025-10-07 16:43:27 - INFO - 
+----------------------------------------------------------------------
+2025-10-07 16:43:27 - INFO - [STEP 1/4] LOAD DATASET FROM HUGGINGFACE
+2025-10-07 16:43:27 - INFO - ----------------------------------------------------------------------
+2025-10-07 16:43:27 - INFO - Dataset: hao-li/AIDev
+2025-10-07 16:43:27 - INFO - Config: pull_request
+2025-10-07 16:43:27 - INFO - Cache location: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
+2025-10-07 16:43:27 - INFO - Downloading config 'pull_request' from HuggingFace...
+2025-10-07 16:43:27 - INFO -   (First download may take a minute)
+2025-10-07 16:43:27 - INFO -   Will be cached to: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
+2025-10-07 16:43:27 - INFO - 
+2025-10-07 16:43:28 - INFO - ✓ Dataset loaded successfully!
+2025-10-07 16:43:28 - INFO -   Available splits: ['train']
+2025-10-07 16:43:28 - INFO -   - Split 'train': 33,596 records
+2025-10-07 16:43:28 - INFO - 
+✓ Step 1 Complete - Config 'pull_request' ready (33,596 records)
+2025-10-07 16:43:28 - INFO - 
+----------------------------------------------------------------------
+2025-10-07 16:43:28 - INFO - [STEP 2/4] UNDERSTAND DATASET SCHEMA
+2025-10-07 16:43:28 - INFO - ----------------------------------------------------------------------
+2025-10-07 16:43:28 - INFO - Analyzing primary split: 'train'
+2025-10-07 16:43:28 - INFO - Number of records: 33,596
+2025-10-07 16:43:28 - INFO - 
+--- DATASET FEATURES (COLUMNS) ---
+2025-10-07 16:43:28 - INFO -   • id
+2025-10-07 16:43:28 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-07 16:43:28 - INFO -   • number
+2025-10-07 16:43:28 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-07 16:43:28 - INFO -   • title
+2025-10-07 16:43:28 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-07 16:43:28 - INFO -   • body
+2025-10-07 16:43:28 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-07 16:43:28 - INFO -   • agent
+2025-10-07 16:43:28 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-07 16:43:28 - INFO -   • user_id
+2025-10-07 16:43:28 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-07 16:43:28 - INFO -   • user
+2025-10-07 16:43:28 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-07 16:43:28 - INFO -   • state
+2025-10-07 16:43:28 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-07 16:43:28 - INFO -   • created_at
+2025-10-07 16:43:28 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-07 16:43:28 - INFO -   • closed_at
+2025-10-07 16:43:28 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-07 16:43:28 - INFO -   • merged_at
+2025-10-07 16:43:28 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-07 16:43:28 - INFO -   • repo_id
+2025-10-07 16:43:28 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-07 16:43:28 - INFO -   • repo_url
+2025-10-07 16:43:28 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-07 16:43:28 - INFO -   • html_url
+2025-10-07 16:43:28 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-07 16:43:28 - INFO - 
+--- SAMPLE RECORD (First Entry) ---
+2025-10-07 16:43:29 - INFO -   id: 3264933329
+2025-10-07 16:43:29 - INFO -   number: 2911
+2025-10-07 16:43:29 - INFO -   title: Fix: Wait for all partitions in load_collection when some are still loading
+2025-10-07 16:43:29 - INFO -   body: ## Summary
+
+Fixes an issue where `load_collection` would return success when collection progress reached 100%, even if individual partitions were stil... [truncated]
+2025-10-07 16:43:29 - INFO -   agent: Claude_Code
+2025-10-07 16:43:29 - INFO -   user_id: 108661493
+2025-10-07 16:43:29 - INFO -   user: weiliu1031
+2025-10-07 16:43:29 - INFO -   state: closed
+2025-10-07 16:43:29 - INFO -   created_at: 2025-07-26T02:59:01Z
+2025-10-07 16:43:29 - INFO -   closed_at: 2025-07-29T07:01:20Z
+2025-10-07 16:43:29 - INFO -   merged_at: None
+2025-10-07 16:43:29 - INFO -   repo_id: 191751505
+2025-10-07 16:43:29 - INFO -   repo_url: https://api.github.com/repos/milvus-io/pymilvus
+2025-10-07 16:43:29 - INFO -   html_url: https://github.com/milvus-io/pymilvus/pull/2911
+2025-10-07 16:43:29 - INFO - 
+✓ Step 2 Complete - Analyzed 14 fields
+2025-10-07 16:43:29 - INFO - 
+----------------------------------------------------------------------
+2025-10-07 16:43:29 - INFO - [STEP 3/4] IDENTIFY PR METRICS FIELDS
+2025-10-07 16:43:29 - INFO - ----------------------------------------------------------------------
+2025-10-07 16:43:29 - INFO - Analyzing config: 'pull_request'
+2025-10-07 16:43:29 - INFO - Searching for PR metrics fields...
+2025-10-07 16:43:29 - INFO - Target metrics: additions, deletions, files touched
+2025-10-07 16:43:29 - INFO - 
+2025-10-07 16:43:29 - INFO - --- METRICS FIELDS SUMMARY ---
+2025-10-07 16:43:29 - INFO -   Config analyzed: 'pull_request'
+2025-10-07 16:43:29 - INFO -   Additions fields: []
+2025-10-07 16:43:29 - INFO -   Deletions fields: []
+2025-10-07 16:43:29 - INFO -   Files fields: []
+2025-10-07 16:43:29 - INFO -   Other relevant: []
+2025-10-07 16:43:29 - INFO - 
+2025-10-07 16:43:29 - WARNING - ======================================================================
+2025-10-07 16:43:29 - WARNING - ⚠ NOTICE: No PR metrics fields found in this config
+2025-10-07 16:43:29 - WARNING - ======================================================================
+2025-10-07 16:43:29 - INFO - 
+2025-10-07 16:43:29 - INFO - The 'pull_request' config contains PR metadata only:
+2025-10-07 16:43:29 - INFO -   - PR identification (id, number, title)
+2025-10-07 16:43:29 - INFO -   - User/agent information
+2025-10-07 16:43:29 - INFO -   - Timestamps (created, closed, merged)
+2025-10-07 16:43:29 - INFO -   - Links (html_url, repo_url)
+2025-10-07 16:43:29 - INFO - 
+2025-10-07 16:43:29 - INFO - This is expected for the 'pull_request' config.
+2025-10-07 16:43:29 - INFO - Metrics will be extracted from 'pr_commit_details' in Phase 2.
+2025-10-07 16:43:29 - INFO - 
+2025-10-07 16:43:29 - INFO - Available fields in this config:
+2025-10-07 16:43:29 - INFO -   - id
+2025-10-07 16:43:29 - INFO -   - number
+2025-10-07 16:43:29 - INFO -   - title
+2025-10-07 16:43:29 - INFO -   - body
+2025-10-07 16:43:29 - INFO -   - agent
+2025-10-07 16:43:29 - INFO -   - user_id
+2025-10-07 16:43:29 - INFO -   - user
+2025-10-07 16:43:29 - INFO -   - state
+2025-10-07 16:43:29 - INFO -   - created_at
+2025-10-07 16:43:29 - INFO -   - closed_at
+2025-10-07 16:43:29 - INFO -   - merged_at
+2025-10-07 16:43:29 - INFO -   - repo_id
+2025-10-07 16:43:29 - INFO -   - repo_url
+2025-10-07 16:43:29 - INFO -   - html_url
+2025-10-07 16:43:29 - INFO - 
+2025-10-07 16:43:29 - INFO - ✓ Step 3 Complete - Metrics field identification done
+2025-10-07 16:43:29 - INFO - 
+----------------------------------------------------------------------
+2025-10-07 16:43:29 - INFO - [STEP 4/4] CHECK DATA QUALITY
+2025-10-07 16:43:29 - INFO - ----------------------------------------------------------------------
+2025-10-07 16:43:29 - INFO - Checking data quality on sample of 1,000 records
+2025-10-07 16:43:29 - INFO - (Total dataset: 33,596 records)
+2025-10-07 16:43:29 - INFO - 
+2025-10-07 16:43:29 - INFO - --- MISSING/NULL VALUE ANALYSIS ---
+2025-10-07 16:43:29 - INFO -   body:
+2025-10-07 16:43:29 - INFO -     Null values: 1/1000 (0.1%)
+2025-10-07 16:43:29 - INFO -     Total missing: 1/1000 (0.1%)
+2025-10-07 16:43:29 - INFO - 
+2025-10-07 16:43:29 - INFO -   closed_at:
+2025-10-07 16:43:29 - INFO -     Null values: 196/1000 (19.6%)
+2025-10-07 16:43:29 - INFO -     Total missing: 196/1000 (19.6%)
+2025-10-07 16:43:29 - INFO - 
+2025-10-07 16:43:29 - INFO -   merged_at:
+2025-10-07 16:43:29 - INFO -     Null values: 497/1000 (49.7%)
+2025-10-07 16:43:29 - INFO -     Total missing: 497/1000 (49.7%)
+2025-10-07 16:43:29 - INFO - 
+2025-10-07 16:43:29 - INFO - --- METRICS FIELDS QUALITY CHECK ---
+2025-10-07 16:43:29 - WARNING -   No metrics fields identified yet
+2025-10-07 16:43:29 - INFO - --- QUALITY SUMMARY ---
+2025-10-07 16:43:29 - INFO -   Total fields checked: 14
+2025-10-07 16:43:29 - INFO -   Fields with missing data: 3
+2025-10-07 16:43:29 - INFO -   Sample size: 1,000 records
+2025-10-07 16:43:29 - INFO - 
+✓ Step 4 Complete - Data quality check done
+2025-10-07 16:43:29 - INFO - 
+======================================================================
+2025-10-07 16:43:29 - INFO - ✓ PHASE 1 for 'pull_request' COMPLETE - Dataset partially ready
+2025-10-07 16:43:29 - INFO - ======================================================================
+2025-10-07 16:43:29 - INFO - Dataset loaded: 33596 records
+2025-10-07 16:43:29 - INFO - Configuration: pull_request
+2025-10-07 16:43:29 - INFO - Primary split: train
+2025-10-07 16:43:29 - INFO - Cache status: downloaded
+2025-10-07 16:43:29 - INFO - ======================================================================
+2025-10-07 16:43:29 - INFO - PHASE 1: DATASET EXPLORATION
+2025-10-07 16:43:29 - INFO - ======================================================================
+2025-10-07 16:43:29 - INFO - This phase will:
+2025-10-07 16:43:29 - INFO -   1. Load dataset from HuggingFace (or cache)
+2025-10-07 16:43:29 - INFO -   2. Understand the dataset schema
+2025-10-07 16:43:29 - INFO -   3. Identify PR metrics fields (additions/deletions/files)
+2025-10-07 16:43:29 - INFO -   4. Check data quality
+2025-10-07 16:43:29 - INFO - 
+2025-10-07 16:43:29 - INFO - 
+----------------------------------------------------------------------
+2025-10-07 16:43:29 - INFO - [STEP 1/4] LOAD DATASET FROM HUGGINGFACE
+2025-10-07 16:43:29 - INFO - ----------------------------------------------------------------------
+2025-10-07 16:43:29 - INFO - Dataset: hao-li/AIDev
+2025-10-07 16:43:29 - INFO - Config: pr_commit_details
+2025-10-07 16:43:29 - INFO - Cache location: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
+2025-10-07 16:43:29 - INFO - Downloading config 'pr_commit_details' from HuggingFace...
+2025-10-07 16:43:29 - INFO -   (First download may take a minute)
+2025-10-07 16:43:29 - INFO -   Will be cached to: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
+2025-10-07 16:43:29 - INFO - 
+2025-10-07 16:43:31 - INFO - ✓ Dataset loaded successfully!
+2025-10-07 16:43:31 - INFO -   Available splits: ['train']
+2025-10-07 16:43:31 - INFO -   - Split 'train': 711,923 records
+2025-10-07 16:43:31 - INFO - 
+✓ Step 1 Complete - Config 'pr_commit_details' ready (711,923 records)
+2025-10-07 16:43:31 - INFO - 
+----------------------------------------------------------------------
+2025-10-07 16:43:31 - INFO - [STEP 2/4] UNDERSTAND DATASET SCHEMA
+2025-10-07 16:43:31 - INFO - ----------------------------------------------------------------------
+2025-10-07 16:43:31 - INFO - Analyzing primary split: 'train'
+2025-10-07 16:43:31 - INFO - Number of records: 711,923
+2025-10-07 16:43:31 - INFO - 
+--- DATASET FEATURES (COLUMNS) ---
+2025-10-07 16:43:31 - INFO -   • sha
+2025-10-07 16:43:31 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-07 16:43:31 - INFO -   • pr_id
+2025-10-07 16:43:31 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-07 16:43:31 - INFO -   • author
+2025-10-07 16:43:31 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-07 16:43:31 - INFO -   • committer
+2025-10-07 16:43:31 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-07 16:43:31 - INFO -   • message
+2025-10-07 16:43:31 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-07 16:43:31 - INFO -   • commit_stats_total
+2025-10-07 16:43:31 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-07 16:43:31 - INFO -   • commit_stats_additions
+2025-10-07 16:43:31 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-07 16:43:31 - INFO -   • commit_stats_deletions
+2025-10-07 16:43:31 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-07 16:43:31 - INFO -   • filename
+2025-10-07 16:43:31 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-07 16:43:31 - INFO -   • status
+2025-10-07 16:43:31 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-07 16:43:31 - INFO -   • additions
+2025-10-07 16:43:31 - INFO -       Type: Value(dtype='float64', id=None)
+2025-10-07 16:43:31 - INFO -   • deletions
+2025-10-07 16:43:31 - INFO -       Type: Value(dtype='float64', id=None)
+2025-10-07 16:43:31 - INFO -   • changes
+2025-10-07 16:43:31 - INFO -       Type: Value(dtype='float64', id=None)
+2025-10-07 16:43:31 - INFO -   • patch
+2025-10-07 16:43:31 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-07 16:43:31 - INFO - 
+--- SAMPLE RECORD (First Entry) ---
+2025-10-07 16:43:31 - INFO -   sha: 2b3a5739b4943fa42b37ca5660ce150d56473c2a
+2025-10-07 16:43:31 - INFO -   pr_id: 3176427591
+2025-10-07 16:43:31 - INFO -   author: mnaser
+2025-10-07 16:43:31 - INFO -   committer: mnaser
+2025-10-07 16:43:31 - INFO -   message: [Backport stable/2023.1] ci: update CSI job to use ubuntu-latest (#2783)
+
+Signed-off-by: Mohammed Naser <mnaser@vexxhost.com>
+Signed-off-by: Yaguang T... [truncated]
+2025-10-07 16:43:31 - INFO -   commit_stats_total: 47
+2025-10-07 16:43:31 - INFO -   commit_stats_additions: 27
+2025-10-07 16:43:31 - INFO -   commit_stats_deletions: 20
+2025-10-07 16:43:31 - INFO -   filename: .github/actions/molecule/action.yaml
+2025-10-07 16:43:31 - INFO -   status: modified
+2025-10-07 16:43:31 - INFO -   additions: 3.0
+2025-10-07 16:43:31 - INFO -   deletions: 1.0
+2025-10-07 16:43:31 - INFO -   changes: 4.0
+2025-10-07 16:43:31 - INFO -   patch: None
+2025-10-07 16:43:31 - INFO - 
+✓ Step 2 Complete - Analyzed 14 fields
+2025-10-07 16:43:31 - INFO - 
+----------------------------------------------------------------------
+2025-10-07 16:43:31 - INFO - [STEP 3/4] IDENTIFY PR METRICS FIELDS
+2025-10-07 16:43:31 - INFO - ----------------------------------------------------------------------
+2025-10-07 16:43:31 - INFO - Analyzing config: 'pr_commit_details'
+2025-10-07 16:43:31 - INFO - Searching for PR metrics fields...
+2025-10-07 16:43:31 - INFO - Target metrics: additions, deletions, files touched
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO - ✓ Found ADDITIONS field: 'commit_stats_additions'
+2025-10-07 16:43:31 - INFO -     Sample value: 27
+2025-10-07 16:43:31 - INFO -     Type: int
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO - ✓ Found DELETIONS field: 'commit_stats_deletions'
+2025-10-07 16:43:31 - INFO -     Sample value: 20
+2025-10-07 16:43:31 - INFO -     Type: int
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO - ✓ Found FILES field: 'filename'
+2025-10-07 16:43:31 - INFO -     Sample value: .github/actions/molecule/action.yaml...
+2025-10-07 16:43:31 - INFO -     Type: str
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO - ✓ Found ADDITIONS field: 'additions'
+2025-10-07 16:43:31 - INFO -     Sample value: 3.0
+2025-10-07 16:43:31 - INFO -     Type: float
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO - ✓ Found DELETIONS field: 'deletions'
+2025-10-07 16:43:31 - INFO -     Sample value: 1.0
+2025-10-07 16:43:31 - INFO -     Type: float
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO -   Found related field: 'changes'
+2025-10-07 16:43:31 - INFO -     Sample value: 4.0
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO -   Found related field: 'patch'
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO - --- METRICS FIELDS SUMMARY ---
+2025-10-07 16:43:31 - INFO -   Config analyzed: 'pr_commit_details'
+2025-10-07 16:43:31 - INFO -   Additions fields: ['commit_stats_additions', 'additions']
+2025-10-07 16:43:31 - INFO -   Deletions fields: ['commit_stats_deletions', 'deletions']
+2025-10-07 16:43:31 - INFO -   Files fields: ['filename']
+2025-10-07 16:43:31 - INFO -   Other relevant: ['changes', 'patch']
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO - ======================================================================
+2025-10-07 16:43:31 - INFO - ✓ SUCCESS: Found PR metrics fields!
+2025-10-07 16:43:31 - INFO - ======================================================================
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO -   ✓ Additions data: ['commit_stats_additions', 'additions']
+2025-10-07 16:43:31 - INFO -   ✓ Deletions data: ['commit_stats_deletions', 'deletions']
+2025-10-07 16:43:31 - INFO -   ✓ Files data: ['filename']
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO - This config contains the metrics data needed for analysis.
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO - ✓ Step 3 Complete - Metrics field identification done
+2025-10-07 16:43:31 - INFO - 
+----------------------------------------------------------------------
+2025-10-07 16:43:31 - INFO - [STEP 4/4] CHECK DATA QUALITY
+2025-10-07 16:43:31 - INFO - ----------------------------------------------------------------------
+2025-10-07 16:43:31 - INFO - Checking data quality on sample of 1,000 records
+2025-10-07 16:43:31 - INFO - (Total dataset: 711,923 records)
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO - --- MISSING/NULL VALUE ANALYSIS ---
+2025-10-07 16:43:31 - INFO -   filename:
+2025-10-07 16:43:31 - INFO -     Null values: 2/1000 (0.2%)
+2025-10-07 16:43:31 - INFO -     Total missing: 2/1000 (0.2%)
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO -   status:
+2025-10-07 16:43:31 - INFO -     Null values: 2/1000 (0.2%)
+2025-10-07 16:43:31 - INFO -     Total missing: 2/1000 (0.2%)
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO -   additions:
+2025-10-07 16:43:31 - INFO -     Null values: 2/1000 (0.2%)
+2025-10-07 16:43:31 - INFO -     Total missing: 2/1000 (0.2%)
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO -   deletions:
+2025-10-07 16:43:31 - INFO -     Null values: 2/1000 (0.2%)
+2025-10-07 16:43:31 - INFO -     Total missing: 2/1000 (0.2%)
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO -   changes:
+2025-10-07 16:43:31 - INFO -     Null values: 2/1000 (0.2%)
+2025-10-07 16:43:31 - INFO -     Total missing: 2/1000 (0.2%)
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO -   patch:
+2025-10-07 16:43:31 - INFO -     Null values: 843/1000 (84.3%)
+2025-10-07 16:43:31 - INFO -     Total missing: 843/1000 (84.3%)
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO - --- METRICS FIELDS QUALITY CHECK ---
+2025-10-07 16:43:31 - INFO -   commit_stats_additions:
+2025-10-07 16:43:31 - INFO -     Missing: 0.0%
+2025-10-07 16:43:31 - INFO -     Status: ✓ GOOD (< 5% missing)
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO -   additions:
+2025-10-07 16:43:31 - INFO -     Missing: 0.2%
+2025-10-07 16:43:31 - INFO -     Status: ✓ GOOD (< 5% missing)
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO -   commit_stats_deletions:
+2025-10-07 16:43:31 - INFO -     Missing: 0.0%
+2025-10-07 16:43:31 - INFO -     Status: ✓ GOOD (< 5% missing)
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO -   deletions:
+2025-10-07 16:43:31 - INFO -     Missing: 0.2%
+2025-10-07 16:43:31 - INFO -     Status: ✓ GOOD (< 5% missing)
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO -   filename:
+2025-10-07 16:43:31 - INFO -     Missing: 0.2%
+2025-10-07 16:43:31 - INFO -     Status: ✓ GOOD (< 5% missing)
+2025-10-07 16:43:31 - INFO - 
+2025-10-07 16:43:31 - INFO - --- QUALITY SUMMARY ---
+2025-10-07 16:43:31 - INFO -   Total fields checked: 14
+2025-10-07 16:43:31 - INFO -   Fields with missing data: 6
+2025-10-07 16:43:31 - INFO -   Sample size: 1,000 records
+2025-10-07 16:43:31 - INFO - 
+✓ Step 4 Complete - Data quality check done
+2025-10-07 16:43:31 - INFO - 
+======================================================================
+2025-10-07 16:43:31 - INFO - ✓ PHASE 1 COMPLETE - Dataset ready for extraction
+2025-10-07 16:43:31 - INFO - ======================================================================
+2025-10-07 16:43:31 - INFO - Dataset loaded: 711923 records
+2025-10-07 16:43:31 - INFO - Configuration: pr_commit_details
+2025-10-07 16:43:31 - INFO - Primary split: train
+2025-10-07 16:43:31 - INFO - Cache status: downloaded
+2025-10-07 16:44:38 - INFO - ======================================================================
+2025-10-07 16:44:38 - INFO - PHASE 2: DATA EXTRACTION
+2025-10-07 16:44:38 - INFO - ======================================================================
+2025-10-07 16:44:38 - INFO - Goal: Extract per-PR metrics (additions, deletions, files)
+2025-10-07 16:44:38 - INFO - 
+2025-10-07 16:44:38 - INFO - 
+----------------------------------------------------------------------
+2025-10-07 16:44:38 - INFO - EXTRACTING PER-PR METRICS
+2025-10-07 16:44:38 - INFO - ----------------------------------------------------------------------
+2025-10-07 16:44:38 - INFO - Source datasets:
+2025-10-07 16:44:38 - INFO -   - pull_request: 33,596 PRs
+2025-10-07 16:44:38 - INFO -   - pr_commit_details: 711,923 file-level records
+2025-10-07 16:44:38 - INFO - 
+2025-10-07 16:44:38 - INFO - Step 1: Loading PR metadata...
+2025-10-07 16:44:38 - INFO -   Loaded 33,596 PRs
+2025-10-07 16:44:38 - INFO - 
+Step 2: Aggregating commit-level data per PR...
+2025-10-07 16:44:38 - INFO -   This may take a minute for 711k records...
+2025-10-07 16:44:58 - INFO -     Processed 100,000 / 711,923 records...
+2025-10-07 16:45:18 - INFO -     Processed 200,000 / 711,923 records...
+2025-10-07 16:45:38 - INFO -     Processed 300,000 / 711,923 records...
+2025-10-07 16:45:58 - INFO -     Processed 400,000 / 711,923 records...
+2025-10-07 16:46:19 - INFO -     Processed 500,000 / 711,923 records...
+2025-10-07 16:46:39 - INFO -     Processed 600,000 / 711,923 records...
+2025-10-07 16:47:00 - INFO -     Processed 700,000 / 711,923 records...
+2025-10-07 16:47:02 - INFO -   ✓ Processed all 711,923 records
+2025-10-07 16:47:02 - INFO -   ✓ Found metrics for 33,580 unique PRs
+2025-10-07 16:47:02 - INFO - 
+Step 3: Building metrics DataFrame...
+2025-10-07 16:47:02 - INFO -   ✓ Created metrics DataFrame: 33,580 rows
+2025-10-07 16:47:02 - INFO - 
+Step 4: Merging with PR metadata...
+2025-10-07 16:47:02 - INFO -   ✓ Final DataFrame: 33,596 PRs with metrics
+2025-10-07 16:47:02 - INFO - 
+Step 5: Computing derived metrics...
+2025-10-07 16:47:02 - INFO -   ✓ Added derived metrics:
+2025-10-07 16:47:02 - INFO -     - net_change (additions - deletions)
+2025-10-07 16:47:02 - INFO -     - churn_ratio (deletions / additions)
+2025-10-07 16:47:02 - INFO -     - size_category (XS/S/M/L/XL)
+2025-10-07 16:47:02 - INFO - 
+======================================================================
+2025-10-07 16:47:02 - INFO - SUMMARY STATISTICS
+2025-10-07 16:47:02 - INFO - ======================================================================
+2025-10-07 16:47:02 - INFO - 
+Dataset Totals:
+2025-10-07 16:47:02 - INFO -   Total PRs: 33,596
+2025-10-07 16:47:02 - INFO -   Total additions: 69,337,968 lines
+2025-10-07 16:47:02 - INFO -   Total deletions: 39,601,070 lines
+2025-10-07 16:47:02 - INFO -   Total files touched: 442,618 files
+2025-10-07 16:47:02 - INFO - 
+Per-PR Statistics:
+2025-10-07 16:47:02 - INFO -   Additions:
+2025-10-07 16:47:02 - INFO -     Mean: 2063.9
+2025-10-07 16:47:02 - INFO -     Median: 72.0
+2025-10-07 16:47:02 - INFO -     Min: 0
+2025-10-07 16:47:02 - INFO -     Max: 2591290
+2025-10-07 16:47:02 - INFO -   Deletions:
+2025-10-07 16:47:02 - INFO -     Mean: 1178.7
+2025-10-07 16:47:02 - INFO -     Median: 10.0
+2025-10-07 16:47:02 - INFO -     Min: 0
+2025-10-07 16:47:02 - INFO -     Max: 2040393
+2025-10-07 16:47:02 - INFO -   Files Touched:
+2025-10-07 16:47:02 - INFO -     Mean: 13.2
+2025-10-07 16:47:02 - INFO -     Median: 2.0
+2025-10-07 16:47:02 - INFO -     Min: 0
+2025-10-07 16:47:02 - INFO -     Max: 1641
+2025-10-07 16:47:02 - INFO - 
+PR Size Distribution:
+2025-10-07 16:47:02 - INFO -   L: 1,841 (5.5%)
+2025-10-07 16:47:02 - INFO -   M: 8,818 (26.2%)
+2025-10-07 16:47:02 - INFO -   S: 13,060 (38.9%)
+2025-10-07 16:47:02 - INFO -   XL: 3,748 (11.2%)
+2025-10-07 16:47:02 - INFO -   XS: 6,129 (18.2%)
+2025-10-07 16:47:02 - INFO - 
+2025-10-07 16:47:02 - INFO - ----------------------------------------------------------------------
+2025-10-07 16:47:02 - INFO - Saving results to CSV...
+2025-10-07 16:47:02 - INFO - ✓ Saved to: pr_metrics.csv
+2025-10-07 16:47:02 - INFO - 
+✓ Extraction complete!
+2025-10-07 16:47:02 - INFO - 
+======================================================================
+2025-10-07 16:47:02 - INFO - ✓ PHASE 2 COMPLETE - Per-PR metrics extracted
+2025-10-07 16:47:02 - INFO - ======================================================================
+2025-10-07 16:47:02 - INFO - Total PRs processed: 33,596
+2025-10-07 16:47:02 - INFO - Output file: pr_metrics.csv
+2025-10-07 16:47:08 - INFO - ======================================================================
+2025-10-07 16:47:08 - INFO - PHASE 3: ANALYSIS & VISUALIZATION
+2025-10-07 16:47:08 - INFO - ======================================================================
+2025-10-07 16:47:08 - INFO - Goal: Analyze and visualize PR change patterns
+2025-10-07 16:47:08 - INFO - 
+2025-10-07 16:47:08 - INFO - Step 1: Performing statistical analysis...
+2025-10-07 16:47:08 - INFO - 
+----------------------------------------------------------------------
+2025-10-07 16:47:08 - INFO - STATISTICAL ANALYSIS
+2025-10-07 16:47:08 - INFO - ----------------------------------------------------------------------
+2025-10-07 16:47:08 - INFO - Dataset totals: 33,596 PRs, 69,337,968 additions, 39,601,070 deletions, 442,618 files
+2025-10-07 16:47:08 - INFO -   Additions - Mean: 2063.9, Median: 72.0
+2025-10-07 16:47:08 - INFO -   Deletions - Mean: 1178.7, Median: 10.0
+2025-10-07 16:47:08 - INFO -   Files touched - Mean: 13.2, Median: 2.0
+2025-10-07 16:47:08 - INFO -   Size distribution: XS=6129, S=13060, M=8818, L=1841, XL=3748
+2025-10-07 16:47:08 - INFO - ✓ Statistical analysis saved to: analysis_summary.txt
+2025-10-07 16:47:08 - INFO - 
+Step 2: Generating visualizations...
+2025-10-07 16:47:08 - INFO - 
+----------------------------------------------------------------------
+2025-10-07 16:47:08 - INFO - GENERATING VISUALIZATIONS
+2025-10-07 16:47:08 - INFO - ----------------------------------------------------------------------
+2025-10-07 16:47:08 - INFO -   Creating: additions_distribution.png
+2025-10-07 16:47:08 - INFO -   Creating: deletions_distribution.png
+2025-10-07 16:47:08 - INFO -   Creating: files_distribution.png
+2025-10-07 16:47:09 - INFO -   Creating: size_distribution.png
+2025-10-07 16:47:09 - INFO -   Creating: pr_metrics_overview.png
+2025-10-07 16:47:09 - INFO - ✓ All visualizations saved to: figures/
+2025-10-07 16:47:09 - INFO - 
+======================================================================
+2025-10-07 16:47:09 - INFO - ✓ PHASE 3 COMPLETE
+2025-10-07 16:47:09 - INFO - ======================================================================
+2025-10-07 16:47:09 - INFO - Analysis outputs saved to:
+2025-10-07 16:47:09 - INFO -   - figures/ (5 PNG visualizations)
+2025-10-07 16:47:09 - INFO -   - analysis_summary.txt (text report)
