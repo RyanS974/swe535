@@ -1,0 +1,92 @@
+======================================================================
+MSR 2026 - Question 2: What aspects receive most attention?
+Review Analysis Report
+======================================================================
+
+----------------------------------------------------------------------
+DATASET TOTALS
+----------------------------------------------------------------------
+
+Total PRs analyzed: 33,596
+PRs with review comments: 14,015 (41.7%)
+Total review comments: 47,062
+Average comments per PR (with comments): 3.4
+
+----------------------------------------------------------------------
+CATEGORY DISTRIBUTION (Across All Comments)
+----------------------------------------------------------------------
+
+Total comments by category:
+  Correctness: 15,529 comments (33.0%) ← HIGHEST
+  Other: 11,713 comments (24.9%)
+  Testing: 9,421 comments (20.0%)
+  Style: 8,919 comments (19.0%)
+  Security: 1,480 comments (3.1%)
+
+KEY FINDING: Correctness receives the most attention during code review,
+accounting for 33.0% of all review comments.
+
+----------------------------------------------------------------------
+PER-PR STATISTICS
+----------------------------------------------------------------------
+
+Comments per PR:
+  Mean: 3.4 comments
+  Median: 2.0 comments
+  Std Dev: 3.5
+  Min: 1 comment
+  Max: 44 comments
+
+Percentiles:
+  25th: 1 comments
+  50th: 2 comments
+  75th: 4 comments
+  90th: 7 comments
+  95th: 9 comments
+
+----------------------------------------------------------------------
+PRIMARY CATEGORY DISTRIBUTION
+----------------------------------------------------------------------
+
+PRs by primary category:
+  Correctness-focused: 6,538 PRs (46.7%)
+  Style-focused: 2,865 PRs (20.4%)
+  Other-focused: 2,218 PRs (15.8%)
+  Testing-focused: 2,155 PRs (15.4%)
+  Security-focused: 239 PRs (1.7%)
+
+----------------------------------------------------------------------
+CATEGORY CO-OCCURRENCE ANALYSIS
+----------------------------------------------------------------------
+
+Average categories per PR: 2.0
+
+Common combinations:
+  Style + Correctness: 26% of PRs
+  Style + Testing: 15% of PRs
+  Correctness + Testing: 23% of PRs
+  Style + Correctness + Testing: 11% of PRs
+
+PRs with security concerns also mention:
+  Correctness: 64% of the time
+  Testing: 47% of the time
+  Style: 53% of the time
+
+======================================================================
+RESEARCH QUESTION ANSWER
+======================================================================
+
+What aspects of Agentic-PRs receive the most attention during review?
+
+1. CORRECTNESS (33.0%)
+2. OTHER (24.9%)
+3. TESTING (20.0%)
+4. STYLE (19.0%)
+5. SECURITY (3.1%)
+
+Reviewers prioritize correctness (33.0%) over other (24.9%), suggesting that reviewers focus heavily on
+ensuring functional correctness and catching bugs in AI-generated code.
+
+======================================================================
+END OF REPORT
+======================================================================

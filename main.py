@@ -13,6 +13,7 @@ from phase1 import run_phase1
 from phase2 import run_phase2
 from phase4 import run_phase4
 from phase5 import run_phase5
+from phase6 import run_phase6
 
 # ============================================================================
 # GLOBAL STATE - Persists across menu selections
@@ -371,13 +372,61 @@ def phase6_handler():
     """Handle Phase 6 execution - Analysis & Visualization (Question 2)"""
     global review_analysis_results
     
+    if review_metrics_df is None:
+        print("\n✗ Error: Review metrics not extracted!")
+        print("Please run Phase 5 first.")
+        input("\nPress Enter to return to menu...")
+        return
+    
     print("\n" + "="*70)
     print("PHASE 6: ANALYSIS & VISUALIZATION (Question 2)")
     print("="*70)
-    print("This phase is not yet implemented.")
-    print("Coming in a future session!")
+    print(f"Analyzing {len(review_metrics_df):,} PRs")
+    prs_with_comments = len(review_metrics_df[review_metrics_df['total_comments'] > 0])
+    print(f"PRs with review comments: {prs_with_comments:,}")
+    print("\nThis will generate:")
+    print("  - Statistical analysis report (review_analysis.txt)")
+    print("  - 5 visualizations in figures/ directory:")
+    print("    • q2_category_distribution.png")
+    print("    • q2_comments_per_pr.png")
+    print("    • q2_category_heatmap.png")
+    print("    • q2_primary_category_pie.png")
+    print("    • q2_review_overview.png")
     print("="*70)
-    input("\nPress Enter to return to menu...")
+    
+    proceed = input("\nProceed with analysis? (Y/n): ").strip().lower()
+    if proceed and proceed not in ['y', 'yes', '']:
+        print("Analysis cancelled.")
+        input("\nPress Enter to return to menu...")
+        return
+    
+    # Run Phase 6
+    success = run_phase6(review_metrics_df)
+    
+    if success:
+        review_analysis_results = True
+        
+        print("\n" + "="*70)
+        print("✓ Phase 6 completed successfully!")
+        print("="*70)
+        print("\nGenerated outputs:")
+        print("  📊 Visualizations:")
+        print("     - figures/q2_category_distribution.png")
+        print("     - figures/q2_comments_per_pr.png")
+        print("     - figures/q2_category_heatmap.png")
+        print("     - figures/q2_primary_category_pie.png")
+        print("     - figures/q2_review_overview.png")
+        print("\n  📄 Report:")
+        print("     - review_analysis.txt (comprehensive analysis)")
+        print("\nThese outputs answer Question 2 for our MSR 2026 paper:")
+        print("'What aspects of Agentic-PRs receive the most attention during review?'")
+        input("\nPress Enter to return to menu...")
+    else:
+        print("\n" + "="*70)
+        print("✗ Phase 6 encountered errors")
+        print("="*70)
+        print("Check the log file for details: msr_analysis.log")
+        input("\nPress Enter to return to menu...")
 
 
 def main():
