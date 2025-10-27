@@ -12,3 +12,7 @@ I have included the results of a full run of the app:
 - charts in the figures directory
 
 If you run the app, it just overwrites all of these.  Currently with the same data, it will produce the same thing, but if the data did change, it will create new versions overwriting the older ones.
+
+A note on q2_review_overview.png.  Category Distribution is 'What percentage of ALL COMMENTS are about correctness?" Compared to Primary Category which is "For each PR, what category got the MOST comments?  The percentage in Primary Category is of counting how many PRs belong to each category."
+
+Category Distribution is working at the overall comment level, not distinguishing PRs.  Primary Category is working on the PR level.
