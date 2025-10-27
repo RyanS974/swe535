@@ -11,6 +11,7 @@ import sys
 from utils.logging_config import setup_logging
 from phase1 import run_phase1
 from phase2 import run_phase2
+from phase4 import run_phase4
 
 # ============================================================================
 # GLOBAL STATE - Persists across menu selections
@@ -21,8 +22,10 @@ dataset_state = {
     'metadata': {}           # Metadata about loaded configs
 }
 
-pr_metrics_df = None  # Will hold extracted metrics (Phase 2)
-analysis_results = None  # Will hold analysis results (Phase 3)
+pr_metrics_df = None  # Will hold extracted metrics (Phase 2 - Question 1)
+analysis_results = None  # Will hold analysis results (Phase 3 - Question 1)
+review_metrics_df = None  # Will hold review metrics (Phase 5 - Question 2)
+review_analysis_results = None  # Will hold review analysis (Phase 6 - Question 2)
 
 # Configuration mappings for MSR Challenge
 PHASE_CONFIG_MAP = {
@@ -51,8 +54,10 @@ def display_menu():
     # Show current state
     loaded_configs = list(dataset_state.get('configs', {}).keys())
     has_configs = len(loaded_configs) > 0
-    metrics_extracted = pr_metrics_df is not None
-    analysis_done = analysis_results is not None
+    q1_metrics_extracted = pr_metrics_df is not None
+    q1_analysis_done = analysis_results is not None
+    q2_metrics_extracted = review_metrics_df is not None
+    q2_analysis_done = review_analysis_results is not None
     
     print("\n[CURRENT STATE]")
     print(f"  Configs loaded: {len(loaded_configs)}")
@@ -64,16 +69,35 @@ def display_menu():
     else:
         print("    No configs loaded yet")
     
-    print(f"  Metrics extracted: {'✓ Yes' if metrics_extracted else '✗ No'}")
-    if metrics_extracted:
+    print(f"\n  Question 1 (Code Changes):")
+    print(f"    Metrics extracted: {'✓ Yes' if q1_metrics_extracted else '✗ No'}")
+    if q1_metrics_extracted:
         print(f"    Rows in metrics: {len(pr_metrics_df):,}")
-    print(f"  Analysis complete: {'✓ Yes' if analysis_done else '✗ No'}")
+    print(f"    Analysis complete: {'✓ Yes' if q1_analysis_done else '✗ No'}")
+    
+    print(f"\n  Question 2 (Review Attention):")
+    print(f"    Metrics extracted: {'✓ Yes' if q2_metrics_extracted else '✗ No'}")
+    if q2_metrics_extracted:
+        print(f"    Rows in metrics: {len(review_metrics_df):,}")
+    print(f"    Analysis complete: {'✓ Yes' if q2_analysis_done else '✗ No'}")
     
     print("\n[MENU OPTIONS]")
+    print("=" * 70)
+    print("Question 1: How do Agentic-PRs change code?")
+    print("-" * 70)
     print("1. Phase 1: Dataset Exploration (Question 1)")
     print("2. Phase 2: Data Extraction (Question 1)")
-    print("3. Phase 3: Analysis & Visualization")
-    print("4. Exit")
+    print("3. Phase 3: Analysis & Visualization (Question 1)")
+    print()
+    print("=" * 70)
+    print("Question 2: What aspects receive most attention during review?")
+    print("-" * 70)
+    print("4. Phase 4: Dataset Exploration (Question 2)")
+    print("5. Phase 5: Data Extraction (Question 2)")
+    print("6. Phase 6: Analysis & Visualization (Question 2)")
+    print()
+    print("=" * 70)
+    print("7. Exit")
     print("\n" + "-"*70)
 
 
@@ -83,7 +107,7 @@ def phase1_handler():
     phase_info = PHASE_CONFIG_MAP['phase1']
     
     print("\n" + "="*70)
-    print("PHASE 1: DATASET EXPLORATION")
+    print("PHASE 1: DATASET EXPLORATION (Question 1)")
     print("="*70)
     print(f"Research Question: {phase_info['question']}")
     print(f"Required Configs:")
@@ -123,13 +147,13 @@ def phase1_handler():
 
 
 def phase2_handler():
-    """Handle Phase 2 execution - Extract per-PR metrics"""
+    """Handle Phase 2 execution - Extract per-PR metrics (Question 1)"""
     global pr_metrics_df
     
     phase_info = PHASE_CONFIG_MAP['phase1']  # Using phase1 config for Question 1
     
     print("\n" + "="*70)
-    print("PHASE 2: DATA EXTRACTION")
+    print("PHASE 2: DATA EXTRACTION (Question 1)")
     print("="*70)
     print(f"Research Question: {phase_info['question']}")
     print("="*70)
@@ -176,7 +200,7 @@ def phase2_handler():
 
 
 def phase3_handler():
-    """Handle Phase 3 execution - Analysis & Visualization"""
+    """Handle Phase 3 execution - Analysis & Visualization (Question 1)"""
     global analysis_results
     
     if pr_metrics_df is None:
@@ -186,7 +210,7 @@ def phase3_handler():
         return
     
     print("\n" + "="*70)
-    print("PHASE 3: ANALYSIS & VISUALIZATION")
+    print("PHASE 3: ANALYSIS & VISUALIZATION (Question 1)")
     print("="*70)
     print(f"Analyzing {len(pr_metrics_df):,} PRs")
     print("This will generate:")
@@ -228,6 +252,77 @@ def phase3_handler():
         input("\nPress Enter to return to menu...")
 
 
+def phase4_handler():
+    """Handle Phase 4 execution - Question 2 dataset exploration"""
+    
+    phase_info = PHASE_CONFIG_MAP['phase2']  # Question 2 configs
+    
+    print("\n" + "="*70)
+    print("PHASE 4: DATASET EXPLORATION (Question 2)")
+    print("="*70)
+    print(f"Research Question: {phase_info['question']}")
+    print(f"Required Configs:")
+    for config in phase_info['configs']:
+        print(f"  - {config}")
+    print("="*70)
+    
+    # Load all three configs needed for Question 2
+    configs_to_load = phase_info['configs']
+    
+    for config_name in configs_to_load:
+        # Check if already loaded
+        if config_name in dataset_state.get('configs', {}):
+            print(f"\n✓ Config '{config_name}' already loaded in memory")
+            continue
+        
+        print(f"\nLoading config: {config_name}")
+        
+        success = run_phase4(dataset_state, config_name=config_name)
+        
+        if not success:
+            print(f"\n✗ Failed to load config: {config_name}")
+            print("Check the log file for details: msr_analysis.log")
+            input("\nPress Enter to return to menu...")
+            return
+    
+    print("\n" + "="*70)
+    print("✓ Phase 4 completed successfully!")
+    print("="*70)
+    print("All required configs loaded:")
+    for config in configs_to_load:
+        if config in dataset_state.get('configs', {}):
+            records = dataset_state['metadata'].get(f'{config}_records', 0)
+            print(f"  ✓ {config}: {records:,} records")
+    print("\nDatasets are now ready for Phase 5 (Data Extraction)")
+    input("\nPress Enter to return to menu...")
+
+
+def phase5_handler():
+    """Handle Phase 5 execution - Extract review metrics (Question 2)"""
+    global review_metrics_df
+    
+    print("\n" + "="*70)
+    print("PHASE 5: DATA EXTRACTION (Question 2)")
+    print("="*70)
+    print("This phase is not yet implemented.")
+    print("Coming in the next session!")
+    print("="*70)
+    input("\nPress Enter to return to menu...")
+
+
+def phase6_handler():
+    """Handle Phase 6 execution - Analysis & Visualization (Question 2)"""
+    global review_analysis_results
+    
+    print("\n" + "="*70)
+    print("PHASE 6: ANALYSIS & VISUALIZATION (Question 2)")
+    print("="*70)
+    print("This phase is not yet implemented.")
+    print("Coming in a future session!")
+    print("="*70)
+    input("\nPress Enter to return to menu...")
+
+
 def main():
     """Main program loop"""
     # Setup logging
@@ -245,7 +340,7 @@ def main():
     while True:
         try:
             display_menu()
-            choice = input("Select option (1-4): ").strip()
+            choice = input("Select option (1-7): ").strip()
             
             if choice == "1":
                 phase1_handler()
@@ -254,13 +349,19 @@ def main():
             elif choice == "3":
                 phase3_handler()
             elif choice == "4":
+                phase4_handler()
+            elif choice == "5":
+                phase5_handler()
+            elif choice == "6":
+                phase6_handler()
+            elif choice == "7":
                 print("\n" + "="*70)
                 print("Exiting MSR Analysis Tool")
                 print("="*70)
                 print("Thank you for using the tool!")
                 break
             else:
-                print("\n✗ Invalid option. Please select 1-4.")
+                print("\n✗ Invalid option. Please select 1-7.")
                 input("Press Enter to continue...")
                 
         except KeyboardInterrupt:
