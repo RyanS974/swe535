@@ -12,6 +12,7 @@ from utils.logging_config import setup_logging
 from phase1 import run_phase1
 from phase2 import run_phase2
 from phase4 import run_phase4
+from phase5 import run_phase5
 
 # ============================================================================
 # GLOBAL STATE - Persists across menu selections
@@ -301,13 +302,69 @@ def phase5_handler():
     """Handle Phase 5 execution - Extract review metrics (Question 2)"""
     global review_metrics_df
     
+    phase_info = PHASE_CONFIG_MAP['phase2']  # Question 2 configs
+    
     print("\n" + "="*70)
     print("PHASE 5: DATA EXTRACTION (Question 2)")
     print("="*70)
-    print("This phase is not yet implemented.")
-    print("Coming in the next session!")
+    print(f"Research Question: {phase_info['question']}")
     print("="*70)
-    input("\nPress Enter to return to menu...")
+    
+    # Check if required configs are loaded
+    required_configs = phase_info['configs'] + ['pull_request']  # Need PR metadata too
+    missing_configs = []
+    
+    for config in required_configs:
+        if config not in dataset_state.get('configs', {}):
+            missing_configs.append(config)
+    
+    if missing_configs:
+        print("\n✗ Error: Required configs not loaded!")
+        print(f"Missing: {', '.join(missing_configs)}")
+        if 'pull_request' in missing_configs:
+            print("\nNote: Need 'pull_request' for PR metadata. Run Phase 1 first.")
+        else:
+            print("\nPlease run Phase 4 first to load review comment datasets.")
+        input("\nPress Enter to return to menu...")
+        return
+    
+    print("\nAll required configs are loaded. Starting extraction...")
+    print("This will:")
+    print("  - Aggregate comments from 3 sources per PR")
+    print("  - Classify comments into categories")
+    print("  - Generate review_metrics.csv")
+    print("")
+    
+    proceed = input("Proceed with extraction? (Y/n): ").strip().lower()
+    if proceed and proceed not in ['y', 'yes', '']:
+        print("Extraction cancelled.")
+        input("\nPress Enter to return to menu...")
+        return
+    
+    # Run Phase 5 extraction
+    success, metrics_df = run_phase5(dataset_state)
+    
+    if success and metrics_df is not None:
+        review_metrics_df = metrics_df
+        
+        print("\n" + "="*70)
+        print("✓ Phase 5 completed successfully!")
+        print("="*70)
+        print(f"Extracted metrics for {len(review_metrics_df):,} PRs")
+        prs_with_comments = len(review_metrics_df[review_metrics_df['total_comments'] > 0])
+        print(f"PRs with review comments: {prs_with_comments:,}")
+        print(f"\nMetrics DataFrame columns:")
+        for col in review_metrics_df.columns:
+            print(f"  - {col}")
+        print(f"\nData saved to: review_metrics.csv")
+        print("\nReady for Phase 6 (Analysis & Visualization)")
+        input("\nPress Enter to return to menu...")
+    else:
+        print("\n" + "="*70)
+        print("✗ Phase 5 encountered errors")
+        print("="*70)
+        print("Check the log file for details: msr_analysis.log")
+        input("\nPress Enter to return to menu...")
 
 
 def phase6_handler():

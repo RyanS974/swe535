@@ -1,228 +1,709 @@
-2025-10-26 19:29:05 - INFO - ======================================================================
-2025-10-26 19:29:05 - INFO - Logging initialized - Output to console and msr_analysis.log
-2025-10-26 19:29:05 - INFO - ======================================================================
-2025-10-26 19:29:06 - INFO - ======================================================================
-2025-10-26 19:29:06 - INFO - PHASE 4: DATASET EXPLORATION (Question 2)
-2025-10-26 19:29:06 - INFO - ======================================================================
-2025-10-26 19:29:06 - INFO - This phase will:
-2025-10-26 19:29:06 - INFO -   1. Load dataset from HuggingFace (or cache)
-2025-10-26 19:29:06 - INFO -   2. Understand the dataset schema
-2025-10-26 19:29:06 - INFO -   3. Identify comment text fields
-2025-10-26 19:29:06 - INFO -   4. Check data quality
-2025-10-26 19:29:06 - INFO - 
-2025-10-26 19:29:06 - INFO - 
+2025-10-26 20:43:18 - INFO - ======================================================================
+2025-10-26 20:43:18 - INFO - Logging initialized - Output to console and msr_analysis.log
+2025-10-26 20:43:18 - INFO - ======================================================================
+2025-10-26 20:43:19 - INFO - ======================================================================
+2025-10-26 20:43:19 - INFO - PHASE 1: DATASET EXPLORATION
+2025-10-26 20:43:19 - INFO - ======================================================================
+2025-10-26 20:43:19 - INFO - This phase will:
+2025-10-26 20:43:19 - INFO -   1. Load dataset from HuggingFace (or cache)
+2025-10-26 20:43:19 - INFO -   2. Understand the dataset schema
+2025-10-26 20:43:19 - INFO -   3. Identify PR metrics fields (additions/deletions/files)
+2025-10-26 20:43:19 - INFO -   4. Check data quality
+2025-10-26 20:43:19 - INFO - 
+2025-10-26 20:43:19 - INFO - 
 ----------------------------------------------------------------------
-2025-10-26 19:29:06 - INFO - [STEP 1/4] LOAD DATASET FROM HUGGINGFACE
-2025-10-26 19:29:06 - INFO - ----------------------------------------------------------------------
-2025-10-26 19:29:06 - INFO - Dataset: hao-li/AIDev
-2025-10-26 19:29:06 - INFO - Config: pr_review_comments
-2025-10-26 19:29:06 - INFO - Cache location: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses-icloud/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
-2025-10-26 19:29:06 - INFO - Downloading config 'pr_review_comments' from HuggingFace...
-2025-10-26 19:29:06 - INFO -   (First download may take a minute)
-2025-10-26 19:29:06 - INFO -   Will be cached to: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses-icloud/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
-2025-10-26 19:29:06 - INFO - 
-2025-10-26 19:29:08 - INFO - ✓ Dataset loaded successfully!
-2025-10-26 19:29:08 - INFO -   Available splits: ['train']
-2025-10-26 19:29:08 - INFO -   - Split 'train': 19,450 records
-2025-10-26 19:29:08 - INFO - 
-✓ Step 1 Complete - Config 'pr_review_comments' ready (19,450 records)
-2025-10-26 19:29:08 - INFO - 
+2025-10-26 20:43:19 - INFO - [STEP 1/4] LOAD DATASET FROM HUGGINGFACE
+2025-10-26 20:43:19 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:43:19 - INFO - Dataset: hao-li/AIDev
+2025-10-26 20:43:19 - INFO - Config: pull_request
+2025-10-26 20:43:19 - INFO - Cache location: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses-icloud/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
+2025-10-26 20:43:19 - INFO - Downloading config 'pull_request' from HuggingFace...
+2025-10-26 20:43:19 - INFO -   (First download may take a minute)
+2025-10-26 20:43:19 - INFO -   Will be cached to: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses-icloud/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
+2025-10-26 20:43:19 - INFO - 
+2025-10-26 20:43:20 - INFO - ✓ Dataset loaded successfully!
+2025-10-26 20:43:20 - INFO -   Available splits: ['train']
+2025-10-26 20:43:20 - INFO -   - Split 'train': 33,596 records
+2025-10-26 20:43:20 - INFO - 
+✓ Step 1 Complete - Config 'pull_request' ready (33,596 records)
+2025-10-26 20:43:20 - INFO - 
 ----------------------------------------------------------------------
-2025-10-26 19:29:08 - INFO - [STEP 2/4] UNDERSTAND DATASET SCHEMA
-2025-10-26 19:29:08 - INFO - ----------------------------------------------------------------------
-2025-10-26 19:29:08 - INFO - Analyzing primary split: 'train'
-2025-10-26 19:29:08 - INFO - Number of records: 19,450
-2025-10-26 19:29:08 - INFO - 
+2025-10-26 20:43:20 - INFO - [STEP 2/4] UNDERSTAND DATASET SCHEMA
+2025-10-26 20:43:20 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:43:20 - INFO - Analyzing primary split: 'train'
+2025-10-26 20:43:20 - INFO - Number of records: 33,596
+2025-10-26 20:43:20 - INFO - 
 --- DATASET FEATURES (COLUMNS) ---
-2025-10-26 19:29:08 - INFO -   • id
-2025-10-26 19:29:08 - INFO -       Type: Value(dtype='int64', id=None)
-2025-10-26 19:29:08 - INFO -   • pull_request_review_id
-2025-10-26 19:29:08 - INFO -       Type: Value(dtype='int64', id=None)
-2025-10-26 19:29:08 - INFO -   • user
-2025-10-26 19:29:08 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:08 - INFO -   • user_type
-2025-10-26 19:29:08 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:08 - INFO -   • diff_hunk
-2025-10-26 19:29:08 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:08 - INFO -   • path
-2025-10-26 19:29:08 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:08 - INFO -   • position
-2025-10-26 19:29:08 - INFO -       Type: Value(dtype='float64', id=None)
-2025-10-26 19:29:08 - INFO -   • original_position
-2025-10-26 19:29:08 - INFO -       Type: Value(dtype='int64', id=None)
-2025-10-26 19:29:08 - INFO -   • commit_id
-2025-10-26 19:29:08 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:08 - INFO -   • original_commit_id
-2025-10-26 19:29:08 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:08 - INFO -   • body
-2025-10-26 19:29:08 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:08 - INFO -   • pull_request_url
-2025-10-26 19:29:08 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:08 - INFO -   • created_at
-2025-10-26 19:29:08 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:08 - INFO -   • updated_at
-2025-10-26 19:29:08 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:08 - INFO -   • in_reply_to_id
-2025-10-26 19:29:08 - INFO -       Type: Value(dtype='float64', id=None)
-2025-10-26 19:29:08 - INFO - 
+2025-10-26 20:43:20 - INFO -   • id
+2025-10-26 20:43:20 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-26 20:43:20 - INFO -   • number
+2025-10-26 20:43:20 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-26 20:43:20 - INFO -   • title
+2025-10-26 20:43:20 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:43:20 - INFO -   • body
+2025-10-26 20:43:20 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:43:20 - INFO -   • agent
+2025-10-26 20:43:20 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:43:20 - INFO -   • user_id
+2025-10-26 20:43:20 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-26 20:43:20 - INFO -   • user
+2025-10-26 20:43:20 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:43:20 - INFO -   • state
+2025-10-26 20:43:20 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:43:20 - INFO -   • created_at
+2025-10-26 20:43:20 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:43:20 - INFO -   • closed_at
+2025-10-26 20:43:20 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:43:20 - INFO -   • merged_at
+2025-10-26 20:43:20 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:43:20 - INFO -   • repo_id
+2025-10-26 20:43:20 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-26 20:43:20 - INFO -   • repo_url
+2025-10-26 20:43:20 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:43:20 - INFO -   • html_url
+2025-10-26 20:43:20 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:43:20 - INFO - 
 --- SAMPLE RECORD (First Entry) ---
-2025-10-26 19:29:08 - INFO -   id: 2200843160
-2025-10-26 19:29:08 - INFO -   pull_request_review_id: 3010483959
-2025-10-26 19:29:08 - INFO -   user: dpgeorge
-2025-10-26 19:29:08 - INFO -   user_type: User
-2025-10-26 19:29:08 - INFO -   diff_hunk: @@ -56,6 +56,14 @@
+2025-10-26 20:43:20 - INFO -   id: 3264933329
+2025-10-26 20:43:20 - INFO -   number: 2911
+2025-10-26 20:43:20 - INFO -   title: Fix: Wait for all partitions in load_collection when some are still loading
+2025-10-26 20:43:20 - INFO -   body: ## Summary
+
+Fixes an issue where `load_collection` would return success when collection progress reached 100%, even if individual partitions were stil... [truncated]
+2025-10-26 20:43:20 - INFO -   agent: Claude_Code
+2025-10-26 20:43:20 - INFO -   user_id: 108661493
+2025-10-26 20:43:20 - INFO -   user: weiliu1031
+2025-10-26 20:43:20 - INFO -   state: closed
+2025-10-26 20:43:20 - INFO -   created_at: 2025-07-26T02:59:01Z
+2025-10-26 20:43:20 - INFO -   closed_at: 2025-07-29T07:01:20Z
+2025-10-26 20:43:20 - INFO -   merged_at: None
+2025-10-26 20:43:20 - INFO -   repo_id: 191751505
+2025-10-26 20:43:20 - INFO -   repo_url: https://api.github.com/repos/milvus-io/pymilvus
+2025-10-26 20:43:20 - INFO -   html_url: https://github.com/milvus-io/pymilvus/pull/2911
+2025-10-26 20:43:20 - INFO - 
+✓ Step 2 Complete - Analyzed 14 fields
+2025-10-26 20:43:20 - INFO - 
+----------------------------------------------------------------------
+2025-10-26 20:43:20 - INFO - [STEP 3/4] IDENTIFY PR METRICS FIELDS
+2025-10-26 20:43:20 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:43:20 - INFO - Analyzing config: 'pull_request'
+2025-10-26 20:43:20 - INFO - Searching for PR metrics fields...
+2025-10-26 20:43:20 - INFO - Target metrics: additions, deletions, files touched
+2025-10-26 20:43:20 - INFO - 
+2025-10-26 20:43:20 - INFO - --- METRICS FIELDS SUMMARY ---
+2025-10-26 20:43:20 - INFO -   Config analyzed: 'pull_request'
+2025-10-26 20:43:20 - INFO -   Additions fields: []
+2025-10-26 20:43:20 - INFO -   Deletions fields: []
+2025-10-26 20:43:20 - INFO -   Files fields: []
+2025-10-26 20:43:20 - INFO -   Other relevant: []
+2025-10-26 20:43:20 - INFO - 
+2025-10-26 20:43:20 - WARNING - ======================================================================
+2025-10-26 20:43:20 - WARNING - ⚠ NOTICE: No PR metrics fields found in this config
+2025-10-26 20:43:20 - WARNING - ======================================================================
+2025-10-26 20:43:20 - INFO - 
+2025-10-26 20:43:20 - INFO - The 'pull_request' config contains PR metadata only:
+2025-10-26 20:43:20 - INFO -   - PR identification (id, number, title)
+2025-10-26 20:43:20 - INFO -   - User/agent information
+2025-10-26 20:43:20 - INFO -   - Timestamps (created, closed, merged)
+2025-10-26 20:43:20 - INFO -   - Links (html_url, repo_url)
+2025-10-26 20:43:20 - INFO - 
+2025-10-26 20:43:20 - INFO - This is expected for the 'pull_request' config.
+2025-10-26 20:43:20 - INFO - Metrics will be extracted from 'pr_commit_details' in Phase 2.
+2025-10-26 20:43:20 - INFO - 
+2025-10-26 20:43:20 - INFO - Available fields in this config:
+2025-10-26 20:43:20 - INFO -   - id
+2025-10-26 20:43:20 - INFO -   - number
+2025-10-26 20:43:20 - INFO -   - title
+2025-10-26 20:43:20 - INFO -   - body
+2025-10-26 20:43:20 - INFO -   - agent
+2025-10-26 20:43:20 - INFO -   - user_id
+2025-10-26 20:43:20 - INFO -   - user
+2025-10-26 20:43:20 - INFO -   - state
+2025-10-26 20:43:20 - INFO -   - created_at
+2025-10-26 20:43:20 - INFO -   - closed_at
+2025-10-26 20:43:20 - INFO -   - merged_at
+2025-10-26 20:43:20 - INFO -   - repo_id
+2025-10-26 20:43:20 - INFO -   - repo_url
+2025-10-26 20:43:20 - INFO -   - html_url
+2025-10-26 20:43:20 - INFO - 
+2025-10-26 20:43:20 - INFO - ✓ Step 3 Complete - Metrics field identification done
+2025-10-26 20:43:20 - INFO - 
+----------------------------------------------------------------------
+2025-10-26 20:43:20 - INFO - [STEP 4/4] CHECK DATA QUALITY
+2025-10-26 20:43:20 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:43:20 - INFO - Checking data quality on sample of 1,000 records
+2025-10-26 20:43:20 - INFO - (Total dataset: 33,596 records)
+2025-10-26 20:43:20 - INFO - 
+2025-10-26 20:43:20 - INFO - --- MISSING/NULL VALUE ANALYSIS ---
+2025-10-26 20:43:21 - INFO -   body:
+2025-10-26 20:43:21 - INFO -     Null values: 1/1000 (0.1%)
+2025-10-26 20:43:21 - INFO -     Total missing: 1/1000 (0.1%)
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO -   closed_at:
+2025-10-26 20:43:21 - INFO -     Null values: 196/1000 (19.6%)
+2025-10-26 20:43:21 - INFO -     Total missing: 196/1000 (19.6%)
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO -   merged_at:
+2025-10-26 20:43:21 - INFO -     Null values: 497/1000 (49.7%)
+2025-10-26 20:43:21 - INFO -     Total missing: 497/1000 (49.7%)
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO - --- METRICS FIELDS QUALITY CHECK ---
+2025-10-26 20:43:21 - WARNING -   No metrics fields identified yet
+2025-10-26 20:43:21 - INFO - --- QUALITY SUMMARY ---
+2025-10-26 20:43:21 - INFO -   Total fields checked: 14
+2025-10-26 20:43:21 - INFO -   Fields with missing data: 3
+2025-10-26 20:43:21 - INFO -   Sample size: 1,000 records
+2025-10-26 20:43:21 - INFO - 
+✓ Step 4 Complete - Data quality check done
+2025-10-26 20:43:21 - INFO - 
+======================================================================
+2025-10-26 20:43:21 - INFO - ✓ PHASE 1 for 'pull_request' COMPLETE - Dataset partially ready
+2025-10-26 20:43:21 - INFO - ======================================================================
+2025-10-26 20:43:21 - INFO - Dataset loaded: 33596 records
+2025-10-26 20:43:21 - INFO - Configuration: pull_request
+2025-10-26 20:43:21 - INFO - Primary split: train
+2025-10-26 20:43:21 - INFO - Cache status: downloaded
+2025-10-26 20:43:21 - INFO - ======================================================================
+2025-10-26 20:43:21 - INFO - PHASE 1: DATASET EXPLORATION
+2025-10-26 20:43:21 - INFO - ======================================================================
+2025-10-26 20:43:21 - INFO - This phase will:
+2025-10-26 20:43:21 - INFO -   1. Load dataset from HuggingFace (or cache)
+2025-10-26 20:43:21 - INFO -   2. Understand the dataset schema
+2025-10-26 20:43:21 - INFO -   3. Identify PR metrics fields (additions/deletions/files)
+2025-10-26 20:43:21 - INFO -   4. Check data quality
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO - 
+----------------------------------------------------------------------
+2025-10-26 20:43:21 - INFO - [STEP 1/4] LOAD DATASET FROM HUGGINGFACE
+2025-10-26 20:43:21 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:43:21 - INFO - Dataset: hao-li/AIDev
+2025-10-26 20:43:21 - INFO - Config: pr_commit_details
+2025-10-26 20:43:21 - INFO - Cache location: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses-icloud/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
+2025-10-26 20:43:21 - INFO - Downloading config 'pr_commit_details' from HuggingFace...
+2025-10-26 20:43:21 - INFO -   (First download may take a minute)
+2025-10-26 20:43:21 - INFO -   Will be cached to: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses-icloud/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO - ✓ Dataset loaded successfully!
+2025-10-26 20:43:21 - INFO -   Available splits: ['train']
+2025-10-26 20:43:21 - INFO -   - Split 'train': 711,923 records
+2025-10-26 20:43:21 - INFO - 
+✓ Step 1 Complete - Config 'pr_commit_details' ready (711,923 records)
+2025-10-26 20:43:21 - INFO - 
+----------------------------------------------------------------------
+2025-10-26 20:43:21 - INFO - [STEP 2/4] UNDERSTAND DATASET SCHEMA
+2025-10-26 20:43:21 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:43:21 - INFO - Analyzing primary split: 'train'
+2025-10-26 20:43:21 - INFO - Number of records: 711,923
+2025-10-26 20:43:21 - INFO - 
+--- DATASET FEATURES (COLUMNS) ---
+2025-10-26 20:43:21 - INFO -   • sha
+2025-10-26 20:43:21 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:43:21 - INFO -   • pr_id
+2025-10-26 20:43:21 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-26 20:43:21 - INFO -   • author
+2025-10-26 20:43:21 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:43:21 - INFO -   • committer
+2025-10-26 20:43:21 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:43:21 - INFO -   • message
+2025-10-26 20:43:21 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:43:21 - INFO -   • commit_stats_total
+2025-10-26 20:43:21 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-26 20:43:21 - INFO -   • commit_stats_additions
+2025-10-26 20:43:21 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-26 20:43:21 - INFO -   • commit_stats_deletions
+2025-10-26 20:43:21 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-26 20:43:21 - INFO -   • filename
+2025-10-26 20:43:21 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:43:21 - INFO -   • status
+2025-10-26 20:43:21 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:43:21 - INFO -   • additions
+2025-10-26 20:43:21 - INFO -       Type: Value(dtype='float64', id=None)
+2025-10-26 20:43:21 - INFO -   • deletions
+2025-10-26 20:43:21 - INFO -       Type: Value(dtype='float64', id=None)
+2025-10-26 20:43:21 - INFO -   • changes
+2025-10-26 20:43:21 - INFO -       Type: Value(dtype='float64', id=None)
+2025-10-26 20:43:21 - INFO -   • patch
+2025-10-26 20:43:21 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:43:21 - INFO - 
+--- SAMPLE RECORD (First Entry) ---
+2025-10-26 20:43:21 - INFO -   sha: 2b3a5739b4943fa42b37ca5660ce150d56473c2a
+2025-10-26 20:43:21 - INFO -   pr_id: 3176427591
+2025-10-26 20:43:21 - INFO -   author: mnaser
+2025-10-26 20:43:21 - INFO -   committer: mnaser
+2025-10-26 20:43:21 - INFO -   message: [Backport stable/2023.1] ci: update CSI job to use ubuntu-latest (#2783)
+
+Signed-off-by: Mohammed Naser <mnaser@vexxhost.com>
+Signed-off-by: Yaguang T... [truncated]
+2025-10-26 20:43:21 - INFO -   commit_stats_total: 47
+2025-10-26 20:43:21 - INFO -   commit_stats_additions: 27
+2025-10-26 20:43:21 - INFO -   commit_stats_deletions: 20
+2025-10-26 20:43:21 - INFO -   filename: .github/actions/molecule/action.yaml
+2025-10-26 20:43:21 - INFO -   status: modified
+2025-10-26 20:43:21 - INFO -   additions: 3.0
+2025-10-26 20:43:21 - INFO -   deletions: 1.0
+2025-10-26 20:43:21 - INFO -   changes: 4.0
+2025-10-26 20:43:21 - INFO -   patch: None
+2025-10-26 20:43:21 - INFO - 
+✓ Step 2 Complete - Analyzed 14 fields
+2025-10-26 20:43:21 - INFO - 
+----------------------------------------------------------------------
+2025-10-26 20:43:21 - INFO - [STEP 3/4] IDENTIFY PR METRICS FIELDS
+2025-10-26 20:43:21 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:43:21 - INFO - Analyzing config: 'pr_commit_details'
+2025-10-26 20:43:21 - INFO - Searching for PR metrics fields...
+2025-10-26 20:43:21 - INFO - Target metrics: additions, deletions, files touched
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO - ✓ Found ADDITIONS field: 'commit_stats_additions'
+2025-10-26 20:43:21 - INFO -     Sample value: 27
+2025-10-26 20:43:21 - INFO -     Type: int
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO - ✓ Found DELETIONS field: 'commit_stats_deletions'
+2025-10-26 20:43:21 - INFO -     Sample value: 20
+2025-10-26 20:43:21 - INFO -     Type: int
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO - ✓ Found FILES field: 'filename'
+2025-10-26 20:43:21 - INFO -     Sample value: .github/actions/molecule/action.yaml...
+2025-10-26 20:43:21 - INFO -     Type: str
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO - ✓ Found ADDITIONS field: 'additions'
+2025-10-26 20:43:21 - INFO -     Sample value: 3.0
+2025-10-26 20:43:21 - INFO -     Type: float
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO - ✓ Found DELETIONS field: 'deletions'
+2025-10-26 20:43:21 - INFO -     Sample value: 1.0
+2025-10-26 20:43:21 - INFO -     Type: float
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO -   Found related field: 'changes'
+2025-10-26 20:43:21 - INFO -     Sample value: 4.0
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO -   Found related field: 'patch'
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO - --- METRICS FIELDS SUMMARY ---
+2025-10-26 20:43:21 - INFO -   Config analyzed: 'pr_commit_details'
+2025-10-26 20:43:21 - INFO -   Additions fields: ['commit_stats_additions', 'additions']
+2025-10-26 20:43:21 - INFO -   Deletions fields: ['commit_stats_deletions', 'deletions']
+2025-10-26 20:43:21 - INFO -   Files fields: ['filename']
+2025-10-26 20:43:21 - INFO -   Other relevant: ['changes', 'patch']
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO - ======================================================================
+2025-10-26 20:43:21 - INFO - ✓ SUCCESS: Found PR metrics fields!
+2025-10-26 20:43:21 - INFO - ======================================================================
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO -   ✓ Additions data: ['commit_stats_additions', 'additions']
+2025-10-26 20:43:21 - INFO -   ✓ Deletions data: ['commit_stats_deletions', 'deletions']
+2025-10-26 20:43:21 - INFO -   ✓ Files data: ['filename']
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO - This config contains the metrics data needed for analysis.
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO - ✓ Step 3 Complete - Metrics field identification done
+2025-10-26 20:43:21 - INFO - 
+----------------------------------------------------------------------
+2025-10-26 20:43:21 - INFO - [STEP 4/4] CHECK DATA QUALITY
+2025-10-26 20:43:21 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:43:21 - INFO - Checking data quality on sample of 1,000 records
+2025-10-26 20:43:21 - INFO - (Total dataset: 711,923 records)
+2025-10-26 20:43:21 - INFO - 
+2025-10-26 20:43:21 - INFO - --- MISSING/NULL VALUE ANALYSIS ---
+2025-10-26 20:43:22 - INFO -   filename:
+2025-10-26 20:43:22 - INFO -     Null values: 2/1000 (0.2%)
+2025-10-26 20:43:22 - INFO -     Total missing: 2/1000 (0.2%)
+2025-10-26 20:43:22 - INFO - 
+2025-10-26 20:43:22 - INFO -   status:
+2025-10-26 20:43:22 - INFO -     Null values: 2/1000 (0.2%)
+2025-10-26 20:43:22 - INFO -     Total missing: 2/1000 (0.2%)
+2025-10-26 20:43:22 - INFO - 
+2025-10-26 20:43:22 - INFO -   additions:
+2025-10-26 20:43:22 - INFO -     Null values: 2/1000 (0.2%)
+2025-10-26 20:43:22 - INFO -     Total missing: 2/1000 (0.2%)
+2025-10-26 20:43:22 - INFO - 
+2025-10-26 20:43:22 - INFO -   deletions:
+2025-10-26 20:43:22 - INFO -     Null values: 2/1000 (0.2%)
+2025-10-26 20:43:22 - INFO -     Total missing: 2/1000 (0.2%)
+2025-10-26 20:43:22 - INFO - 
+2025-10-26 20:43:22 - INFO -   changes:
+2025-10-26 20:43:22 - INFO -     Null values: 2/1000 (0.2%)
+2025-10-26 20:43:22 - INFO -     Total missing: 2/1000 (0.2%)
+2025-10-26 20:43:22 - INFO - 
+2025-10-26 20:43:22 - INFO -   patch:
+2025-10-26 20:43:22 - INFO -     Null values: 843/1000 (84.3%)
+2025-10-26 20:43:22 - INFO -     Total missing: 843/1000 (84.3%)
+2025-10-26 20:43:22 - INFO - 
+2025-10-26 20:43:22 - INFO - --- METRICS FIELDS QUALITY CHECK ---
+2025-10-26 20:43:22 - INFO -   commit_stats_additions:
+2025-10-26 20:43:22 - INFO -     Missing: 0.0%
+2025-10-26 20:43:22 - INFO -     Status: ✓ GOOD (< 5% missing)
+2025-10-26 20:43:22 - INFO - 
+2025-10-26 20:43:22 - INFO -   additions:
+2025-10-26 20:43:22 - INFO -     Missing: 0.2%
+2025-10-26 20:43:22 - INFO -     Status: ✓ GOOD (< 5% missing)
+2025-10-26 20:43:22 - INFO - 
+2025-10-26 20:43:22 - INFO -   commit_stats_deletions:
+2025-10-26 20:43:22 - INFO -     Missing: 0.0%
+2025-10-26 20:43:22 - INFO -     Status: ✓ GOOD (< 5% missing)
+2025-10-26 20:43:22 - INFO - 
+2025-10-26 20:43:22 - INFO -   deletions:
+2025-10-26 20:43:22 - INFO -     Missing: 0.2%
+2025-10-26 20:43:22 - INFO -     Status: ✓ GOOD (< 5% missing)
+2025-10-26 20:43:22 - INFO - 
+2025-10-26 20:43:22 - INFO -   filename:
+2025-10-26 20:43:22 - INFO -     Missing: 0.2%
+2025-10-26 20:43:22 - INFO -     Status: ✓ GOOD (< 5% missing)
+2025-10-26 20:43:22 - INFO - 
+2025-10-26 20:43:22 - INFO - --- QUALITY SUMMARY ---
+2025-10-26 20:43:22 - INFO -   Total fields checked: 14
+2025-10-26 20:43:22 - INFO -   Fields with missing data: 6
+2025-10-26 20:43:22 - INFO -   Sample size: 1,000 records
+2025-10-26 20:43:22 - INFO - 
+✓ Step 4 Complete - Data quality check done
+2025-10-26 20:43:22 - INFO - 
+======================================================================
+2025-10-26 20:43:22 - INFO - ✓ PHASE 1 COMPLETE - Dataset ready for extraction
+2025-10-26 20:43:22 - INFO - ======================================================================
+2025-10-26 20:43:22 - INFO - Dataset loaded: 711923 records
+2025-10-26 20:43:22 - INFO - Configuration: pr_commit_details
+2025-10-26 20:43:22 - INFO - Primary split: train
+2025-10-26 20:43:22 - INFO - Cache status: downloaded
+2025-10-26 20:43:24 - INFO - ======================================================================
+2025-10-26 20:43:24 - INFO - PHASE 2: DATA EXTRACTION
+2025-10-26 20:43:24 - INFO - ======================================================================
+2025-10-26 20:43:24 - INFO - Goal: Extract per-PR metrics (additions, deletions, files)
+2025-10-26 20:43:24 - INFO - 
+2025-10-26 20:43:24 - INFO - 
+----------------------------------------------------------------------
+2025-10-26 20:43:24 - INFO - EXTRACTING PER-PR METRICS
+2025-10-26 20:43:24 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:43:24 - INFO - Source datasets:
+2025-10-26 20:43:24 - INFO -   - pull_request: 33,596 PRs
+2025-10-26 20:43:24 - INFO -   - pr_commit_details: 711,923 file-level records
+2025-10-26 20:43:24 - INFO - 
+2025-10-26 20:43:24 - INFO - Step 1: Loading PR metadata...
+2025-10-26 20:43:24 - INFO -   Loaded 33,596 PRs
+2025-10-26 20:43:24 - INFO - 
+Step 2: Aggregating commit-level data per PR...
+2025-10-26 20:43:24 - INFO -   This may take a minute for 711k records...
+2025-10-26 20:43:44 - INFO -     Processed 100,000 / 711,923 records...
+2025-10-26 20:44:05 - INFO -     Processed 200,000 / 711,923 records...
+2025-10-26 20:44:26 - INFO -     Processed 300,000 / 711,923 records...
+2025-10-26 20:44:48 - INFO -     Processed 400,000 / 711,923 records...
+2025-10-26 20:45:09 - INFO -     Processed 500,000 / 711,923 records...
+2025-10-26 20:45:30 - INFO -     Processed 600,000 / 711,923 records...
+2025-10-26 20:45:51 - INFO -     Processed 700,000 / 711,923 records...
+2025-10-26 20:45:53 - INFO -   ✓ Processed all 711,923 records
+2025-10-26 20:45:53 - INFO -   ✓ Found metrics for 33,580 unique PRs
+2025-10-26 20:45:53 - INFO - 
+Step 3: Building metrics DataFrame...
+2025-10-26 20:45:53 - INFO -   ✓ Created metrics DataFrame: 33,580 rows
+2025-10-26 20:45:53 - INFO - 
+Step 4: Merging with PR metadata...
+2025-10-26 20:45:53 - INFO -   ✓ Final DataFrame: 33,596 PRs with metrics
+2025-10-26 20:45:53 - INFO - 
+Step 5: Computing derived metrics...
+2025-10-26 20:45:53 - INFO -   ✓ Added derived metrics:
+2025-10-26 20:45:53 - INFO -     - net_change (additions - deletions)
+2025-10-26 20:45:53 - INFO -     - churn_ratio (deletions / additions)
+2025-10-26 20:45:53 - INFO -     - size_category (XS/S/M/L/XL)
+2025-10-26 20:45:53 - INFO - 
+======================================================================
+2025-10-26 20:45:53 - INFO - SUMMARY STATISTICS
+2025-10-26 20:45:53 - INFO - ======================================================================
+2025-10-26 20:45:53 - INFO - 
+Dataset Totals:
+2025-10-26 20:45:53 - INFO -   Total PRs: 33,596
+2025-10-26 20:45:53 - INFO -   Total additions: 69,337,968 lines
+2025-10-26 20:45:53 - INFO -   Total deletions: 39,601,070 lines
+2025-10-26 20:45:53 - INFO -   Total files touched: 442,618 files
+2025-10-26 20:45:53 - INFO - 
+Per-PR Statistics:
+2025-10-26 20:45:53 - INFO -   Additions:
+2025-10-26 20:45:53 - INFO -     Mean: 2063.9
+2025-10-26 20:45:53 - INFO -     Median: 72.0
+2025-10-26 20:45:53 - INFO -     Min: 0
+2025-10-26 20:45:53 - INFO -     Max: 2591290
+2025-10-26 20:45:53 - INFO -   Deletions:
+2025-10-26 20:45:53 - INFO -     Mean: 1178.7
+2025-10-26 20:45:53 - INFO -     Median: 10.0
+2025-10-26 20:45:53 - INFO -     Min: 0
+2025-10-26 20:45:53 - INFO -     Max: 2040393
+2025-10-26 20:45:53 - INFO -   Files Touched:
+2025-10-26 20:45:53 - INFO -     Mean: 13.2
+2025-10-26 20:45:53 - INFO -     Median: 2.0
+2025-10-26 20:45:53 - INFO -     Min: 0
+2025-10-26 20:45:53 - INFO -     Max: 1641
+2025-10-26 20:45:53 - INFO - 
+PR Size Distribution:
+2025-10-26 20:45:53 - INFO -   L: 1,841 (5.5%)
+2025-10-26 20:45:53 - INFO -   M: 8,818 (26.2%)
+2025-10-26 20:45:53 - INFO -   S: 13,060 (38.9%)
+2025-10-26 20:45:53 - INFO -   XL: 3,748 (11.2%)
+2025-10-26 20:45:53 - INFO -   XS: 6,129 (18.2%)
+2025-10-26 20:45:53 - INFO - 
+2025-10-26 20:45:53 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:45:53 - INFO - Saving results to CSV...
+2025-10-26 20:45:53 - INFO - ✓ Saved to: pr_metrics.csv
+2025-10-26 20:45:53 - INFO - 
+✓ Extraction complete!
+2025-10-26 20:45:53 - INFO - 
+======================================================================
+2025-10-26 20:45:53 - INFO - ✓ PHASE 2 COMPLETE - Per-PR metrics extracted
+2025-10-26 20:45:53 - INFO - ======================================================================
+2025-10-26 20:45:53 - INFO - Total PRs processed: 33,596
+2025-10-26 20:45:53 - INFO - Output file: pr_metrics.csv
+2025-10-26 20:45:59 - INFO - ======================================================================
+2025-10-26 20:45:59 - INFO - PHASE 3: ANALYSIS & VISUALIZATION
+2025-10-26 20:45:59 - INFO - ======================================================================
+2025-10-26 20:45:59 - INFO - Goal: Analyze and visualize PR change patterns
+2025-10-26 20:45:59 - INFO - 
+2025-10-26 20:45:59 - INFO - Step 1: Performing statistical analysis...
+2025-10-26 20:45:59 - INFO - 
+----------------------------------------------------------------------
+2025-10-26 20:45:59 - INFO - STATISTICAL ANALYSIS
+2025-10-26 20:45:59 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:45:59 - INFO - Dataset totals: 33,596 PRs, 69,337,968 additions, 39,601,070 deletions, 442,618 files
+2025-10-26 20:45:59 - INFO -   Additions - Mean: 2063.9, Median: 72.0
+2025-10-26 20:45:59 - INFO -   Deletions - Mean: 1178.7, Median: 10.0
+2025-10-26 20:45:59 - INFO -   Files touched - Mean: 13.2, Median: 2.0
+2025-10-26 20:45:59 - INFO -   Size distribution: XS=6129, S=13060, M=8818, L=1841, XL=3748
+2025-10-26 20:45:59 - INFO - ✓ Statistical analysis saved to: analysis_summary.txt
+2025-10-26 20:45:59 - INFO - 
+Step 2: Generating visualizations...
+2025-10-26 20:45:59 - INFO - 
+----------------------------------------------------------------------
+2025-10-26 20:45:59 - INFO - GENERATING VISUALIZATIONS
+2025-10-26 20:45:59 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:45:59 - INFO -   Creating: additions_distribution.png
+2025-10-26 20:46:00 - INFO -   Creating: deletions_distribution.png
+2025-10-26 20:46:00 - INFO -   Creating: files_distribution.png
+2025-10-26 20:46:00 - INFO -   Creating: size_distribution.png
+2025-10-26 20:46:00 - INFO -   Creating: pr_metrics_overview.png
+2025-10-26 20:46:01 - INFO - ✓ All visualizations saved to: figures/
+2025-10-26 20:46:01 - INFO - 
+======================================================================
+2025-10-26 20:46:01 - INFO - ✓ PHASE 3 COMPLETE
+2025-10-26 20:46:01 - INFO - ======================================================================
+2025-10-26 20:46:01 - INFO - Analysis outputs saved to:
+2025-10-26 20:46:01 - INFO -   - figures/ (5 PNG visualizations)
+2025-10-26 20:46:01 - INFO -   - analysis_summary.txt (text report)
+2025-10-26 20:46:02 - INFO - ======================================================================
+2025-10-26 20:46:02 - INFO - PHASE 4: DATASET EXPLORATION (Question 2)
+2025-10-26 20:46:02 - INFO - ======================================================================
+2025-10-26 20:46:02 - INFO - This phase will:
+2025-10-26 20:46:02 - INFO -   1. Load dataset from HuggingFace (or cache)
+2025-10-26 20:46:02 - INFO -   2. Understand the dataset schema
+2025-10-26 20:46:02 - INFO -   3. Identify comment text fields
+2025-10-26 20:46:02 - INFO -   4. Check data quality
+2025-10-26 20:46:02 - INFO - 
+2025-10-26 20:46:02 - INFO - 
+----------------------------------------------------------------------
+2025-10-26 20:46:02 - INFO - [STEP 1/4] LOAD DATASET FROM HUGGINGFACE
+2025-10-26 20:46:02 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:46:02 - INFO - Dataset: hao-li/AIDev
+2025-10-26 20:46:02 - INFO - Config: pr_review_comments
+2025-10-26 20:46:02 - INFO - Cache location: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses-icloud/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
+2025-10-26 20:46:02 - INFO - Downloading config 'pr_review_comments' from HuggingFace...
+2025-10-26 20:46:02 - INFO -   (First download may take a minute)
+2025-10-26 20:46:02 - INFO -   Will be cached to: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses-icloud/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
+2025-10-26 20:46:02 - INFO - 
+2025-10-26 20:46:03 - INFO - ✓ Dataset loaded successfully!
+2025-10-26 20:46:03 - INFO -   Available splits: ['train']
+2025-10-26 20:46:03 - INFO -   - Split 'train': 19,450 records
+2025-10-26 20:46:03 - INFO - 
+✓ Step 1 Complete - Config 'pr_review_comments' ready (19,450 records)
+2025-10-26 20:46:03 - INFO - 
+----------------------------------------------------------------------
+2025-10-26 20:46:03 - INFO - [STEP 2/4] UNDERSTAND DATASET SCHEMA
+2025-10-26 20:46:03 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:46:03 - INFO - Analyzing primary split: 'train'
+2025-10-26 20:46:03 - INFO - Number of records: 19,450
+2025-10-26 20:46:03 - INFO - 
+--- DATASET FEATURES (COLUMNS) ---
+2025-10-26 20:46:03 - INFO -   • id
+2025-10-26 20:46:03 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-26 20:46:03 - INFO -   • pull_request_review_id
+2025-10-26 20:46:03 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-26 20:46:03 - INFO -   • user
+2025-10-26 20:46:03 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:03 - INFO -   • user_type
+2025-10-26 20:46:03 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:03 - INFO -   • diff_hunk
+2025-10-26 20:46:03 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:03 - INFO -   • path
+2025-10-26 20:46:03 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:03 - INFO -   • position
+2025-10-26 20:46:03 - INFO -       Type: Value(dtype='float64', id=None)
+2025-10-26 20:46:03 - INFO -   • original_position
+2025-10-26 20:46:03 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-26 20:46:03 - INFO -   • commit_id
+2025-10-26 20:46:03 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:03 - INFO -   • original_commit_id
+2025-10-26 20:46:03 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:03 - INFO -   • body
+2025-10-26 20:46:03 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:03 - INFO -   • pull_request_url
+2025-10-26 20:46:03 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:03 - INFO -   • created_at
+2025-10-26 20:46:03 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:03 - INFO -   • updated_at
+2025-10-26 20:46:03 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:03 - INFO -   • in_reply_to_id
+2025-10-26 20:46:03 - INFO -       Type: Value(dtype='float64', id=None)
+2025-10-26 20:46:03 - INFO - 
+--- SAMPLE RECORD (First Entry) ---
+2025-10-26 20:46:03 - INFO -   id: 2200843160
+2025-10-26 20:46:03 - INFO -   pull_request_review_id: 3010483959
+2025-10-26 20:46:03 - INFO -   user: dpgeorge
+2025-10-26 20:46:03 - INFO -   user_type: User
+2025-10-26 20:46:03 - INFO -   diff_hunk: @@ -56,6 +56,14 @@
  #define PHY_SPEED_100FULL  (6)
  #define PHY_DUPLEX         (4)
  
 +// PHY interrupt registers (common for LAN87xx and DP838xx)
-2025-10-26 19:29:08 - INFO -   path: ports/stm32/eth_phy.h
-2025-10-26 19:29:08 - INFO -   position: None
-2025-10-26 19:29:08 - INFO -   original_position: 4
-2025-10-26 19:29:08 - INFO -   commit_id: 47bace5680b27e235dc5d06ee5c3adff54079d7d
-2025-10-26 19:29:08 - INFO -   original_commit_id: 05231c28d4ac24eac705507ce6b50e6e504e76d0
-2025-10-26 19:29:08 - INFO -   body: These constants aren't used anywhere.
-2025-10-26 19:29:08 - INFO -   pull_request_url: https://api.github.com/repos/micropython/micropython/pulls/17613
-2025-10-26 19:29:08 - INFO -   created_at: 2025-07-11T14:09:34Z
-2025-10-26 19:29:08 - INFO -   updated_at: 2025-07-11T14:09:34Z
-2025-10-26 19:29:08 - INFO -   in_reply_to_id: None
-2025-10-26 19:29:08 - INFO - 
+2025-10-26 20:46:03 - INFO -   path: ports/stm32/eth_phy.h
+2025-10-26 20:46:03 - INFO -   position: None
+2025-10-26 20:46:03 - INFO -   original_position: 4
+2025-10-26 20:46:03 - INFO -   commit_id: 47bace5680b27e235dc5d06ee5c3adff54079d7d
+2025-10-26 20:46:03 - INFO -   original_commit_id: 05231c28d4ac24eac705507ce6b50e6e504e76d0
+2025-10-26 20:46:03 - INFO -   body: These constants aren't used anywhere.
+2025-10-26 20:46:03 - INFO -   pull_request_url: https://api.github.com/repos/micropython/micropython/pulls/17613
+2025-10-26 20:46:03 - INFO -   created_at: 2025-07-11T14:09:34Z
+2025-10-26 20:46:03 - INFO -   updated_at: 2025-07-11T14:09:34Z
+2025-10-26 20:46:03 - INFO -   in_reply_to_id: None
+2025-10-26 20:46:03 - INFO - 
 ✓ Step 2 Complete - Analyzed 15 fields
-2025-10-26 19:29:08 - INFO - 
+2025-10-26 20:46:03 - INFO - 
 ----------------------------------------------------------------------
-2025-10-26 19:29:08 - INFO - [STEP 3/4] IDENTIFY COMMENT FIELDS
-2025-10-26 19:29:08 - INFO - ----------------------------------------------------------------------
-2025-10-26 19:29:08 - INFO - Analyzing config: 'pr_review_comments'
-2025-10-26 19:29:08 - INFO - Searching for comment text fields...
-2025-10-26 19:29:08 - INFO - Target: fields containing review comment text
-2025-10-26 19:29:08 - INFO - 
-2025-10-26 19:29:08 - INFO - ✓ Found comment field: 'body'
-2025-10-26 19:29:08 - INFO -     Sample: These constants aren't used anywhere....
-2025-10-26 19:29:08 - INFO -     Type: string
-2025-10-26 19:29:08 - INFO - 
-2025-10-26 19:29:08 - INFO - --- COMMENT FIELDS SUMMARY ---
-2025-10-26 19:29:08 - INFO -   Config analyzed: 'pr_review_comments'
-2025-10-26 19:29:08 - INFO -   Comment fields found: ['body']
-2025-10-26 19:29:08 - INFO - 
-2025-10-26 19:29:08 - INFO - ======================================================================
-2025-10-26 19:29:08 - INFO - ✓ SUCCESS: Found comment text fields!
-2025-10-26 19:29:08 - INFO - ======================================================================
-2025-10-26 19:29:08 - INFO - 
-2025-10-26 19:29:08 - INFO -   ✓ Comment text fields: ['body']
-2025-10-26 19:29:08 - INFO - 
-2025-10-26 19:29:08 - INFO - This config contains the comment data needed for analysis.
-2025-10-26 19:29:08 - INFO - 
-2025-10-26 19:29:08 - INFO - ✓ Step 3 Complete - Comment field identification done
-2025-10-26 19:29:08 - INFO - 
+2025-10-26 20:46:03 - INFO - [STEP 3/4] IDENTIFY COMMENT FIELDS
+2025-10-26 20:46:03 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:46:03 - INFO - Analyzing config: 'pr_review_comments'
+2025-10-26 20:46:03 - INFO - Searching for comment text fields...
+2025-10-26 20:46:03 - INFO - Target: fields containing review comment text
+2025-10-26 20:46:03 - INFO - 
+2025-10-26 20:46:03 - INFO - ✓ Found comment field: 'body'
+2025-10-26 20:46:03 - INFO -     Sample: These constants aren't used anywhere....
+2025-10-26 20:46:03 - INFO -     Type: string
+2025-10-26 20:46:03 - INFO - 
+2025-10-26 20:46:03 - INFO - --- COMMENT FIELDS SUMMARY ---
+2025-10-26 20:46:03 - INFO -   Config analyzed: 'pr_review_comments'
+2025-10-26 20:46:03 - INFO -   Comment fields found: ['body']
+2025-10-26 20:46:03 - INFO - 
+2025-10-26 20:46:03 - INFO - ======================================================================
+2025-10-26 20:46:03 - INFO - ✓ SUCCESS: Found comment text fields!
+2025-10-26 20:46:03 - INFO - ======================================================================
+2025-10-26 20:46:03 - INFO - 
+2025-10-26 20:46:03 - INFO -   ✓ Comment text fields: ['body']
+2025-10-26 20:46:03 - INFO - 
+2025-10-26 20:46:03 - INFO - This config contains the comment data needed for analysis.
+2025-10-26 20:46:03 - INFO - 
+2025-10-26 20:46:03 - INFO - ✓ Step 3 Complete - Comment field identification done
+2025-10-26 20:46:03 - INFO - 
 ----------------------------------------------------------------------
-2025-10-26 19:29:08 - INFO - [STEP 4/4] CHECK DATA QUALITY
-2025-10-26 19:29:08 - INFO - ----------------------------------------------------------------------
-2025-10-26 19:29:08 - INFO - Checking data quality on sample of 1,000 records
-2025-10-26 19:29:08 - INFO - (Total dataset: 19,450 records)
-2025-10-26 19:29:08 - INFO - 
-2025-10-26 19:29:08 - INFO - --- MISSING/NULL VALUE ANALYSIS ---
-2025-10-26 19:29:08 - INFO -   diff_hunk:
-2025-10-26 19:29:08 - INFO -     Null values: 55/1000 (5.5%)
-2025-10-26 19:29:08 - INFO -     Total missing: 55/1000 (5.5%)
-2025-10-26 19:29:08 - INFO - 
-2025-10-26 19:29:08 - INFO -   position:
-2025-10-26 19:29:08 - INFO -     Null values: 612/1000 (61.2%)
-2025-10-26 19:29:08 - INFO -     Total missing: 612/1000 (61.2%)
-2025-10-26 19:29:08 - INFO - 
-2025-10-26 19:29:09 - INFO -   in_reply_to_id:
-2025-10-26 19:29:09 - INFO -     Null values: 492/1000 (49.2%)
-2025-10-26 19:29:09 - INFO -     Total missing: 492/1000 (49.2%)
-2025-10-26 19:29:09 - INFO - 
-2025-10-26 19:29:09 - INFO - --- METRICS FIELDS QUALITY CHECK ---
-2025-10-26 19:29:09 - WARNING -   No metrics fields identified yet
-2025-10-26 19:29:09 - INFO - --- QUALITY SUMMARY ---
-2025-10-26 19:29:09 - INFO -   Total fields checked: 15
-2025-10-26 19:29:09 - INFO -   Fields with missing data: 3
-2025-10-26 19:29:09 - INFO -   Sample size: 1,000 records
-2025-10-26 19:29:09 - INFO - 
+2025-10-26 20:46:03 - INFO - [STEP 4/4] CHECK DATA QUALITY
+2025-10-26 20:46:03 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:46:03 - INFO - Checking data quality on sample of 1,000 records
+2025-10-26 20:46:03 - INFO - (Total dataset: 19,450 records)
+2025-10-26 20:46:03 - INFO - 
+2025-10-26 20:46:03 - INFO - --- MISSING/NULL VALUE ANALYSIS ---
+2025-10-26 20:46:03 - INFO -   diff_hunk:
+2025-10-26 20:46:03 - INFO -     Null values: 55/1000 (5.5%)
+2025-10-26 20:46:03 - INFO -     Total missing: 55/1000 (5.5%)
+2025-10-26 20:46:03 - INFO - 
+2025-10-26 20:46:04 - INFO -   position:
+2025-10-26 20:46:04 - INFO -     Null values: 612/1000 (61.2%)
+2025-10-26 20:46:04 - INFO -     Total missing: 612/1000 (61.2%)
+2025-10-26 20:46:04 - INFO - 
+2025-10-26 20:46:04 - INFO -   in_reply_to_id:
+2025-10-26 20:46:04 - INFO -     Null values: 492/1000 (49.2%)
+2025-10-26 20:46:04 - INFO -     Total missing: 492/1000 (49.2%)
+2025-10-26 20:46:04 - INFO - 
+2025-10-26 20:46:04 - INFO - --- METRICS FIELDS QUALITY CHECK ---
+2025-10-26 20:46:04 - INFO - --- QUALITY SUMMARY ---
+2025-10-26 20:46:04 - INFO -   Total fields checked: 15
+2025-10-26 20:46:04 - INFO -   Fields with missing data: 3
+2025-10-26 20:46:04 - INFO -   Sample size: 1,000 records
+2025-10-26 20:46:04 - INFO - 
 ✓ Step 4 Complete - Data quality check done
-2025-10-26 19:29:09 - INFO - 
+2025-10-26 20:46:04 - INFO - 
 ======================================================================
-2025-10-26 19:29:09 - INFO - ✓ PHASE 4 for 'pr_review_comments' COMPLETE
-2025-10-26 19:29:09 - INFO - ======================================================================
-2025-10-26 19:29:09 - INFO - Dataset loaded: 19450 records
-2025-10-26 19:29:09 - INFO - Configuration: pr_review_comments
-2025-10-26 19:29:09 - INFO - Primary split: train
-2025-10-26 19:29:09 - INFO - Cache status: downloaded
-2025-10-26 19:29:09 - INFO - Comment fields: ['body']
-2025-10-26 19:29:09 - INFO - ======================================================================
-2025-10-26 19:29:09 - INFO - PHASE 4: DATASET EXPLORATION (Question 2)
-2025-10-26 19:29:09 - INFO - ======================================================================
-2025-10-26 19:29:09 - INFO - This phase will:
-2025-10-26 19:29:09 - INFO -   1. Load dataset from HuggingFace (or cache)
-2025-10-26 19:29:09 - INFO -   2. Understand the dataset schema
-2025-10-26 19:29:09 - INFO -   3. Identify comment text fields
-2025-10-26 19:29:09 - INFO -   4. Check data quality
-2025-10-26 19:29:09 - INFO - 
-2025-10-26 19:29:09 - INFO - 
+2025-10-26 20:46:04 - INFO - ✓ PHASE 4 for 'pr_review_comments' COMPLETE
+2025-10-26 20:46:04 - INFO - ======================================================================
+2025-10-26 20:46:04 - INFO - Dataset loaded: 19450 records
+2025-10-26 20:46:04 - INFO - Configuration: pr_review_comments
+2025-10-26 20:46:04 - INFO - Primary split: train
+2025-10-26 20:46:04 - INFO - Cache status: downloaded
+2025-10-26 20:46:04 - INFO - Comment fields: ['body']
+2025-10-26 20:46:04 - INFO - ======================================================================
+2025-10-26 20:46:04 - INFO - PHASE 4: DATASET EXPLORATION (Question 2)
+2025-10-26 20:46:04 - INFO - ======================================================================
+2025-10-26 20:46:04 - INFO - This phase will:
+2025-10-26 20:46:04 - INFO -   1. Load dataset from HuggingFace (or cache)
+2025-10-26 20:46:04 - INFO -   2. Understand the dataset schema
+2025-10-26 20:46:04 - INFO -   3. Identify comment text fields
+2025-10-26 20:46:04 - INFO -   4. Check data quality
+2025-10-26 20:46:04 - INFO - 
+2025-10-26 20:46:04 - INFO - 
 ----------------------------------------------------------------------
-2025-10-26 19:29:09 - INFO - [STEP 1/4] LOAD DATASET FROM HUGGINGFACE
-2025-10-26 19:29:09 - INFO - ----------------------------------------------------------------------
-2025-10-26 19:29:09 - INFO - Dataset: hao-li/AIDev
-2025-10-26 19:29:09 - INFO - Config: pr_reviews
-2025-10-26 19:29:09 - INFO - Cache location: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses-icloud/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
-2025-10-26 19:29:09 - INFO - Downloading config 'pr_reviews' from HuggingFace...
-2025-10-26 19:29:09 - INFO -   (First download may take a minute)
-2025-10-26 19:29:09 - INFO -   Will be cached to: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses-icloud/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
-2025-10-26 19:29:09 - INFO - 
-2025-10-26 19:29:09 - INFO - ✓ Dataset loaded successfully!
-2025-10-26 19:29:09 - INFO -   Available splits: ['train']
-2025-10-26 19:29:09 - INFO -   - Split 'train': 28,875 records
-2025-10-26 19:29:09 - INFO - 
+2025-10-26 20:46:04 - INFO - [STEP 1/4] LOAD DATASET FROM HUGGINGFACE
+2025-10-26 20:46:04 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:46:04 - INFO - Dataset: hao-li/AIDev
+2025-10-26 20:46:04 - INFO - Config: pr_reviews
+2025-10-26 20:46:04 - INFO - Cache location: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses-icloud/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
+2025-10-26 20:46:04 - INFO - Downloading config 'pr_reviews' from HuggingFace...
+2025-10-26 20:46:04 - INFO -   (First download may take a minute)
+2025-10-26 20:46:04 - INFO -   Will be cached to: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses-icloud/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
+2025-10-26 20:46:04 - INFO - 
+2025-10-26 20:46:04 - INFO - ✓ Dataset loaded successfully!
+2025-10-26 20:46:04 - INFO -   Available splits: ['train']
+2025-10-26 20:46:04 - INFO -   - Split 'train': 28,875 records
+2025-10-26 20:46:04 - INFO - 
 ✓ Step 1 Complete - Config 'pr_reviews' ready (28,875 records)
-2025-10-26 19:29:09 - INFO - 
+2025-10-26 20:46:04 - INFO - 
 ----------------------------------------------------------------------
-2025-10-26 19:29:09 - INFO - [STEP 2/4] UNDERSTAND DATASET SCHEMA
-2025-10-26 19:29:09 - INFO - ----------------------------------------------------------------------
-2025-10-26 19:29:09 - INFO - Analyzing primary split: 'train'
-2025-10-26 19:29:09 - INFO - Number of records: 28,875
-2025-10-26 19:29:09 - INFO - 
+2025-10-26 20:46:04 - INFO - [STEP 2/4] UNDERSTAND DATASET SCHEMA
+2025-10-26 20:46:04 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:46:04 - INFO - Analyzing primary split: 'train'
+2025-10-26 20:46:04 - INFO - Number of records: 28,875
+2025-10-26 20:46:04 - INFO - 
 --- DATASET FEATURES (COLUMNS) ---
-2025-10-26 19:29:09 - INFO -   • id
-2025-10-26 19:29:09 - INFO -       Type: Value(dtype='int64', id=None)
-2025-10-26 19:29:09 - INFO -   • pr_id
-2025-10-26 19:29:09 - INFO -       Type: Value(dtype='int64', id=None)
-2025-10-26 19:29:09 - INFO -   • user
-2025-10-26 19:29:09 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:09 - INFO -   • user_type
-2025-10-26 19:29:09 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:09 - INFO -   • state
-2025-10-26 19:29:09 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:09 - INFO -   • submitted_at
-2025-10-26 19:29:09 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:09 - INFO -   • body
-2025-10-26 19:29:09 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:09 - INFO - 
+2025-10-26 20:46:04 - INFO -   • id
+2025-10-26 20:46:04 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-26 20:46:04 - INFO -   • pr_id
+2025-10-26 20:46:04 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-26 20:46:04 - INFO -   • user
+2025-10-26 20:46:04 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:04 - INFO -   • user_type
+2025-10-26 20:46:04 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:04 - INFO -   • state
+2025-10-26 20:46:04 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:04 - INFO -   • submitted_at
+2025-10-26 20:46:04 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:04 - INFO -   • body
+2025-10-26 20:46:04 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:04 - INFO - 
 --- SAMPLE RECORD (First Entry) ---
-2025-10-26 19:29:09 - INFO -   id: 2885691382
-2025-10-26 19:29:09 - INFO -   pr_id: 3107321792
-2025-10-26 19:29:09 - INFO -   user: coderabbitai[bot]
-2025-10-26 19:29:09 - INFO -   user_type: Bot
-2025-10-26 19:29:09 - INFO -   state: COMMENTED
-2025-10-26 19:29:09 - INFO -   submitted_at: 2025-06-01T14:22:22Z
-2025-10-26 19:29:09 - INFO -   body: **Actionable comments posted: 2**
+2025-10-26 20:46:04 - INFO -   id: 2885691382
+2025-10-26 20:46:04 - INFO -   pr_id: 3107321792
+2025-10-26 20:46:04 - INFO -   user: coderabbitai[bot]
+2025-10-26 20:46:04 - INFO -   user_type: Bot
+2025-10-26 20:46:04 - INFO -   state: COMMENTED
+2025-10-26 20:46:04 - INFO -   submitted_at: 2025-06-01T14:22:22Z
+2025-10-26 20:46:04 - INFO -   body: **Actionable comments posted: 2**
 
 <details>
 <summary>🔭 Outside diff range comments (1)</summary><blockquote>
 
 <details>
 <summary>ocode_python/tools/b... [truncated]
-2025-10-26 19:29:09 - INFO - 
+2025-10-26 20:46:04 - INFO - 
 ✓ Step 2 Complete - Analyzed 7 fields
-2025-10-26 19:29:09 - INFO - 
+2025-10-26 20:46:04 - INFO - 
 ----------------------------------------------------------------------
-2025-10-26 19:29:09 - INFO - [STEP 3/4] IDENTIFY COMMENT FIELDS
-2025-10-26 19:29:09 - INFO - ----------------------------------------------------------------------
-2025-10-26 19:29:09 - INFO - Analyzing config: 'pr_reviews'
-2025-10-26 19:29:09 - INFO - Searching for comment text fields...
-2025-10-26 19:29:09 - INFO - Target: fields containing review comment text
-2025-10-26 19:29:09 - INFO - 
-2025-10-26 19:29:09 - INFO - ✓ Found comment field: 'body'
-2025-10-26 19:29:09 - INFO -     Sample: **Actionable comments posted: 2**
+2025-10-26 20:46:04 - INFO - [STEP 3/4] IDENTIFY COMMENT FIELDS
+2025-10-26 20:46:04 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:46:04 - INFO - Analyzing config: 'pr_reviews'
+2025-10-26 20:46:04 - INFO - Searching for comment text fields...
+2025-10-26 20:46:04 - INFO - Target: fields containing review comment text
+2025-10-26 20:46:04 - INFO - 
+2025-10-26 20:46:04 - INFO - ✓ Found comment field: 'body'
+2025-10-26 20:46:04 - INFO -     Sample: **Actionable comments posted: 2**
 
 <details>
 <summary>🔭 Outside diff range comments (1)</summary><blockquote>
@@ -231,165 +712,287 @@
 <summary>ocode_python/tools/bash_tool.py (1)</summary><blockquote>
 
 `440-459`: ...
-2025-10-26 19:29:09 - INFO -     Type: string
-2025-10-26 19:29:09 - INFO - 
-2025-10-26 19:29:09 - INFO - --- COMMENT FIELDS SUMMARY ---
-2025-10-26 19:29:09 - INFO -   Config analyzed: 'pr_reviews'
-2025-10-26 19:29:09 - INFO -   Comment fields found: ['body']
-2025-10-26 19:29:09 - INFO - 
-2025-10-26 19:29:09 - INFO - ======================================================================
-2025-10-26 19:29:09 - INFO - ✓ SUCCESS: Found comment text fields!
-2025-10-26 19:29:09 - INFO - ======================================================================
-2025-10-26 19:29:09 - INFO - 
-2025-10-26 19:29:09 - INFO -   ✓ Comment text fields: ['body']
-2025-10-26 19:29:09 - INFO - 
-2025-10-26 19:29:09 - INFO - This config contains the comment data needed for analysis.
-2025-10-26 19:29:09 - INFO - 
-2025-10-26 19:29:09 - INFO - ✓ Step 3 Complete - Comment field identification done
-2025-10-26 19:29:09 - INFO - 
+2025-10-26 20:46:04 - INFO -     Type: string
+2025-10-26 20:46:04 - INFO - 
+2025-10-26 20:46:04 - INFO - --- COMMENT FIELDS SUMMARY ---
+2025-10-26 20:46:04 - INFO -   Config analyzed: 'pr_reviews'
+2025-10-26 20:46:04 - INFO -   Comment fields found: ['body']
+2025-10-26 20:46:04 - INFO - 
+2025-10-26 20:46:04 - INFO - ======================================================================
+2025-10-26 20:46:04 - INFO - ✓ SUCCESS: Found comment text fields!
+2025-10-26 20:46:04 - INFO - ======================================================================
+2025-10-26 20:46:04 - INFO - 
+2025-10-26 20:46:04 - INFO -   ✓ Comment text fields: ['body']
+2025-10-26 20:46:04 - INFO - 
+2025-10-26 20:46:04 - INFO - This config contains the comment data needed for analysis.
+2025-10-26 20:46:04 - INFO - 
+2025-10-26 20:46:04 - INFO - ✓ Step 3 Complete - Comment field identification done
+2025-10-26 20:46:04 - INFO - 
 ----------------------------------------------------------------------
-2025-10-26 19:29:09 - INFO - [STEP 4/4] CHECK DATA QUALITY
-2025-10-26 19:29:09 - INFO - ----------------------------------------------------------------------
-2025-10-26 19:29:09 - INFO - Checking data quality on sample of 1,000 records
-2025-10-26 19:29:09 - INFO - (Total dataset: 28,875 records)
-2025-10-26 19:29:09 - INFO - 
-2025-10-26 19:29:09 - INFO - --- MISSING/NULL VALUE ANALYSIS ---
-2025-10-26 19:29:09 - INFO -   body:
-2025-10-26 19:29:09 - INFO -     Null values: 640/1000 (64.0%)
-2025-10-26 19:29:09 - INFO -     Total missing: 640/1000 (64.0%)
-2025-10-26 19:29:09 - INFO - 
-2025-10-26 19:29:09 - INFO - --- METRICS FIELDS QUALITY CHECK ---
-2025-10-26 19:29:09 - WARNING -   No metrics fields identified yet
-2025-10-26 19:29:09 - INFO - --- QUALITY SUMMARY ---
-2025-10-26 19:29:09 - INFO -   Total fields checked: 7
-2025-10-26 19:29:09 - INFO -   Fields with missing data: 1
-2025-10-26 19:29:09 - INFO -   Sample size: 1,000 records
-2025-10-26 19:29:09 - INFO - 
+2025-10-26 20:46:04 - INFO - [STEP 4/4] CHECK DATA QUALITY
+2025-10-26 20:46:04 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:46:04 - INFO - Checking data quality on sample of 1,000 records
+2025-10-26 20:46:04 - INFO - (Total dataset: 28,875 records)
+2025-10-26 20:46:04 - INFO - 
+2025-10-26 20:46:04 - INFO - --- MISSING/NULL VALUE ANALYSIS ---
+2025-10-26 20:46:05 - INFO -   body:
+2025-10-26 20:46:05 - INFO -     Null values: 640/1000 (64.0%)
+2025-10-26 20:46:05 - INFO -     Total missing: 640/1000 (64.0%)
+2025-10-26 20:46:05 - INFO - 
+2025-10-26 20:46:05 - INFO - --- METRICS FIELDS QUALITY CHECK ---
+2025-10-26 20:46:05 - INFO - --- QUALITY SUMMARY ---
+2025-10-26 20:46:05 - INFO -   Total fields checked: 7
+2025-10-26 20:46:05 - INFO -   Fields with missing data: 1
+2025-10-26 20:46:05 - INFO -   Sample size: 1,000 records
+2025-10-26 20:46:05 - INFO - 
 ✓ Step 4 Complete - Data quality check done
-2025-10-26 19:29:09 - INFO - 
+2025-10-26 20:46:05 - INFO - 
 ======================================================================
-2025-10-26 19:29:09 - INFO - ✓ PHASE 4 for 'pr_reviews' COMPLETE
-2025-10-26 19:29:09 - INFO - ======================================================================
-2025-10-26 19:29:09 - INFO - Dataset loaded: 28875 records
-2025-10-26 19:29:09 - INFO - Configuration: pr_reviews
-2025-10-26 19:29:09 - INFO - Primary split: train
-2025-10-26 19:29:09 - INFO - Cache status: downloaded
-2025-10-26 19:29:09 - INFO - Comment fields: ['body']
-2025-10-26 19:29:09 - INFO - ======================================================================
-2025-10-26 19:29:09 - INFO - PHASE 4: DATASET EXPLORATION (Question 2)
-2025-10-26 19:29:09 - INFO - ======================================================================
-2025-10-26 19:29:09 - INFO - This phase will:
-2025-10-26 19:29:09 - INFO -   1. Load dataset from HuggingFace (or cache)
-2025-10-26 19:29:09 - INFO -   2. Understand the dataset schema
-2025-10-26 19:29:09 - INFO -   3. Identify comment text fields
-2025-10-26 19:29:09 - INFO -   4. Check data quality
-2025-10-26 19:29:09 - INFO - 
-2025-10-26 19:29:09 - INFO - 
+2025-10-26 20:46:05 - INFO - ✓ PHASE 4 for 'pr_reviews' COMPLETE
+2025-10-26 20:46:05 - INFO - ======================================================================
+2025-10-26 20:46:05 - INFO - Dataset loaded: 28875 records
+2025-10-26 20:46:05 - INFO - Configuration: pr_reviews
+2025-10-26 20:46:05 - INFO - Primary split: train
+2025-10-26 20:46:05 - INFO - Cache status: downloaded
+2025-10-26 20:46:05 - INFO - Comment fields: ['body']
+2025-10-26 20:46:05 - INFO - ======================================================================
+2025-10-26 20:46:05 - INFO - PHASE 4: DATASET EXPLORATION (Question 2)
+2025-10-26 20:46:05 - INFO - ======================================================================
+2025-10-26 20:46:05 - INFO - This phase will:
+2025-10-26 20:46:05 - INFO -   1. Load dataset from HuggingFace (or cache)
+2025-10-26 20:46:05 - INFO -   2. Understand the dataset schema
+2025-10-26 20:46:05 - INFO -   3. Identify comment text fields
+2025-10-26 20:46:05 - INFO -   4. Check data quality
+2025-10-26 20:46:05 - INFO - 
+2025-10-26 20:46:05 - INFO - 
 ----------------------------------------------------------------------
-2025-10-26 19:29:09 - INFO - [STEP 1/4] LOAD DATASET FROM HUGGINGFACE
-2025-10-26 19:29:09 - INFO - ----------------------------------------------------------------------
-2025-10-26 19:29:09 - INFO - Dataset: hao-li/AIDev
-2025-10-26 19:29:09 - INFO - Config: pr_comments
-2025-10-26 19:29:09 - INFO - Cache location: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses-icloud/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
-2025-10-26 19:29:09 - INFO - Downloading config 'pr_comments' from HuggingFace...
-2025-10-26 19:29:09 - INFO -   (First download may take a minute)
-2025-10-26 19:29:09 - INFO -   Will be cached to: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses-icloud/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
-2025-10-26 19:29:09 - INFO - 
-2025-10-26 19:29:10 - INFO - ✓ Dataset loaded successfully!
-2025-10-26 19:29:10 - INFO -   Available splits: ['train']
-2025-10-26 19:29:10 - INFO -   - Split 'train': 39,122 records
-2025-10-26 19:29:10 - INFO - 
+2025-10-26 20:46:05 - INFO - [STEP 1/4] LOAD DATASET FROM HUGGINGFACE
+2025-10-26 20:46:05 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:46:05 - INFO - Dataset: hao-li/AIDev
+2025-10-26 20:46:05 - INFO - Config: pr_comments
+2025-10-26 20:46:05 - INFO - Cache location: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses-icloud/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
+2025-10-26 20:46:05 - INFO - Downloading config 'pr_comments' from HuggingFace...
+2025-10-26 20:46:05 - INFO -   (First download may take a minute)
+2025-10-26 20:46:05 - INFO -   Will be cached to: /Users/ryan/Library/Mobile Documents/com~apple~CloudDocs/MySchool/umflint/courses-icloud/swe535/presentations/msr2026/code/v2q1/.cache/huggingface/datasets
+2025-10-26 20:46:05 - INFO - 
+2025-10-26 20:46:05 - INFO - ✓ Dataset loaded successfully!
+2025-10-26 20:46:05 - INFO -   Available splits: ['train']
+2025-10-26 20:46:05 - INFO -   - Split 'train': 39,122 records
+2025-10-26 20:46:05 - INFO - 
 ✓ Step 1 Complete - Config 'pr_comments' ready (39,122 records)
-2025-10-26 19:29:10 - INFO - 
+2025-10-26 20:46:05 - INFO - 
 ----------------------------------------------------------------------
-2025-10-26 19:29:10 - INFO - [STEP 2/4] UNDERSTAND DATASET SCHEMA
-2025-10-26 19:29:10 - INFO - ----------------------------------------------------------------------
-2025-10-26 19:29:10 - INFO - Analyzing primary split: 'train'
-2025-10-26 19:29:10 - INFO - Number of records: 39,122
-2025-10-26 19:29:10 - INFO - 
+2025-10-26 20:46:05 - INFO - [STEP 2/4] UNDERSTAND DATASET SCHEMA
+2025-10-26 20:46:05 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:46:05 - INFO - Analyzing primary split: 'train'
+2025-10-26 20:46:05 - INFO - Number of records: 39,122
+2025-10-26 20:46:05 - INFO - 
 --- DATASET FEATURES (COLUMNS) ---
-2025-10-26 19:29:10 - INFO -   • id
-2025-10-26 19:29:10 - INFO -       Type: Value(dtype='int64', id=None)
-2025-10-26 19:29:10 - INFO -   • pr_id
-2025-10-26 19:29:10 - INFO -       Type: Value(dtype='int64', id=None)
-2025-10-26 19:29:10 - INFO -   • user
-2025-10-26 19:29:10 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:10 - INFO -   • user_id
-2025-10-26 19:29:10 - INFO -       Type: Value(dtype='int64', id=None)
-2025-10-26 19:29:10 - INFO -   • user_type
-2025-10-26 19:29:10 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:10 - INFO -   • created_at
-2025-10-26 19:29:10 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:10 - INFO -   • body
-2025-10-26 19:29:10 - INFO -       Type: Value(dtype='string', id=None)
-2025-10-26 19:29:10 - INFO - 
+2025-10-26 20:46:05 - INFO -   • id
+2025-10-26 20:46:05 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-26 20:46:05 - INFO -   • pr_id
+2025-10-26 20:46:05 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-26 20:46:05 - INFO -   • user
+2025-10-26 20:46:05 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:05 - INFO -   • user_id
+2025-10-26 20:46:05 - INFO -       Type: Value(dtype='int64', id=None)
+2025-10-26 20:46:05 - INFO -   • user_type
+2025-10-26 20:46:05 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:05 - INFO -   • created_at
+2025-10-26 20:46:05 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:05 - INFO -   • body
+2025-10-26 20:46:05 - INFO -       Type: Value(dtype='string', id=None)
+2025-10-26 20:46:05 - INFO - 
 --- SAMPLE RECORD (First Entry) ---
-2025-10-26 19:29:10 - INFO -   id: 2927293042
-2025-10-26 19:29:10 - INFO -   pr_id: 3107321792
-2025-10-26 19:29:10 - INFO -   user: coderabbitai[bot]
-2025-10-26 19:29:10 - INFO -   user_id: 136622811
-2025-10-26 19:29:10 - INFO -   user_type: Bot
-2025-10-26 19:29:10 - INFO -   created_at: 2025-06-01T14:15:35Z
-2025-10-26 19:29:10 - INFO -   body: <!-- This is an auto-generated comment: summarize by coderabbit.ai -->
+2025-10-26 20:46:05 - INFO -   id: 2927293042
+2025-10-26 20:46:05 - INFO -   pr_id: 3107321792
+2025-10-26 20:46:05 - INFO -   user: coderabbitai[bot]
+2025-10-26 20:46:05 - INFO -   user_id: 136622811
+2025-10-26 20:46:05 - INFO -   user_type: Bot
+2025-10-26 20:46:05 - INFO -   created_at: 2025-06-01T14:15:35Z
+2025-10-26 20:46:05 - INFO -   body: <!-- This is an auto-generated comment: summarize by coderabbit.ai -->
 <!-- walkthrough_start -->
 
 ## Walkthrough
 
 This update refines shell command p... [truncated]
-2025-10-26 19:29:10 - INFO - 
+2025-10-26 20:46:05 - INFO - 
 ✓ Step 2 Complete - Analyzed 7 fields
-2025-10-26 19:29:10 - INFO - 
+2025-10-26 20:46:05 - INFO - 
 ----------------------------------------------------------------------
-2025-10-26 19:29:10 - INFO - [STEP 3/4] IDENTIFY COMMENT FIELDS
-2025-10-26 19:29:10 - INFO - ----------------------------------------------------------------------
-2025-10-26 19:29:10 - INFO - Analyzing config: 'pr_comments'
-2025-10-26 19:29:10 - INFO - Searching for comment text fields...
-2025-10-26 19:29:10 - INFO - Target: fields containing review comment text
-2025-10-26 19:29:10 - INFO - 
-2025-10-26 19:29:10 - INFO - ✓ Found comment field: 'body'
-2025-10-26 19:29:10 - INFO -     Sample: <!-- This is an auto-generated comment: summarize by coderabbit.ai -->
+2025-10-26 20:46:05 - INFO - [STEP 3/4] IDENTIFY COMMENT FIELDS
+2025-10-26 20:46:05 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:46:05 - INFO - Analyzing config: 'pr_comments'
+2025-10-26 20:46:05 - INFO - Searching for comment text fields...
+2025-10-26 20:46:05 - INFO - Target: fields containing review comment text
+2025-10-26 20:46:05 - INFO - 
+2025-10-26 20:46:05 - INFO - ✓ Found comment field: 'body'
+2025-10-26 20:46:05 - INFO -     Sample: <!-- This is an auto-generated comment: summarize by coderabbit.ai -->
 <!-- walkthrough_start -->
 
 ## Walkthrough
 
 This update refines shell command preparation and input handling in `BashTool`, impro...
-2025-10-26 19:29:10 - INFO -     Type: string
-2025-10-26 19:29:10 - INFO - 
-2025-10-26 19:29:10 - INFO - --- COMMENT FIELDS SUMMARY ---
-2025-10-26 19:29:10 - INFO -   Config analyzed: 'pr_comments'
-2025-10-26 19:29:10 - INFO -   Comment fields found: ['body']
-2025-10-26 19:29:10 - INFO - 
-2025-10-26 19:29:10 - INFO - ======================================================================
-2025-10-26 19:29:10 - INFO - ✓ SUCCESS: Found comment text fields!
-2025-10-26 19:29:10 - INFO - ======================================================================
-2025-10-26 19:29:10 - INFO - 
-2025-10-26 19:29:10 - INFO -   ✓ Comment text fields: ['body']
-2025-10-26 19:29:10 - INFO - 
-2025-10-26 19:29:10 - INFO - This config contains the comment data needed for analysis.
-2025-10-26 19:29:10 - INFO - 
-2025-10-26 19:29:10 - INFO - ✓ Step 3 Complete - Comment field identification done
-2025-10-26 19:29:10 - INFO - 
+2025-10-26 20:46:05 - INFO -     Type: string
+2025-10-26 20:46:05 - INFO - 
+2025-10-26 20:46:05 - INFO - --- COMMENT FIELDS SUMMARY ---
+2025-10-26 20:46:05 - INFO -   Config analyzed: 'pr_comments'
+2025-10-26 20:46:05 - INFO -   Comment fields found: ['body']
+2025-10-26 20:46:05 - INFO - 
+2025-10-26 20:46:05 - INFO - ======================================================================
+2025-10-26 20:46:05 - INFO - ✓ SUCCESS: Found comment text fields!
+2025-10-26 20:46:05 - INFO - ======================================================================
+2025-10-26 20:46:05 - INFO - 
+2025-10-26 20:46:05 - INFO -   ✓ Comment text fields: ['body']
+2025-10-26 20:46:05 - INFO - 
+2025-10-26 20:46:05 - INFO - This config contains the comment data needed for analysis.
+2025-10-26 20:46:05 - INFO - 
+2025-10-26 20:46:05 - INFO - ✓ Step 3 Complete - Comment field identification done
+2025-10-26 20:46:05 - INFO - 
 ----------------------------------------------------------------------
-2025-10-26 19:29:10 - INFO - [STEP 4/4] CHECK DATA QUALITY
-2025-10-26 19:29:10 - INFO - ----------------------------------------------------------------------
-2025-10-26 19:29:10 - INFO - Checking data quality on sample of 1,000 records
-2025-10-26 19:29:10 - INFO - (Total dataset: 39,122 records)
-2025-10-26 19:29:10 - INFO - 
-2025-10-26 19:29:10 - INFO - --- MISSING/NULL VALUE ANALYSIS ---
-2025-10-26 19:29:10 - INFO - --- METRICS FIELDS QUALITY CHECK ---
-2025-10-26 19:29:10 - WARNING -   No metrics fields identified yet
-2025-10-26 19:29:10 - INFO - --- QUALITY SUMMARY ---
-2025-10-26 19:29:10 - INFO -   Total fields checked: 7
-2025-10-26 19:29:10 - INFO -   Fields with missing data: 0
-2025-10-26 19:29:10 - INFO -   Sample size: 1,000 records
-2025-10-26 19:29:10 - INFO - 
+2025-10-26 20:46:05 - INFO - [STEP 4/4] CHECK DATA QUALITY
+2025-10-26 20:46:05 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:46:05 - INFO - Checking data quality on sample of 1,000 records
+2025-10-26 20:46:05 - INFO - (Total dataset: 39,122 records)
+2025-10-26 20:46:05 - INFO - 
+2025-10-26 20:46:05 - INFO - --- MISSING/NULL VALUE ANALYSIS ---
+2025-10-26 20:46:05 - INFO - --- METRICS FIELDS QUALITY CHECK ---
+2025-10-26 20:46:05 - INFO - --- QUALITY SUMMARY ---
+2025-10-26 20:46:05 - INFO -   Total fields checked: 7
+2025-10-26 20:46:05 - INFO -   Fields with missing data: 0
+2025-10-26 20:46:05 - INFO -   Sample size: 1,000 records
+2025-10-26 20:46:05 - INFO - 
 ✓ Step 4 Complete - Data quality check done
-2025-10-26 19:29:10 - INFO - 
+2025-10-26 20:46:05 - INFO - 
 ======================================================================
-2025-10-26 19:29:10 - INFO - ✓ PHASE 4 for 'pr_comments' COMPLETE
-2025-10-26 19:29:10 - INFO - ======================================================================
-2025-10-26 19:29:10 - INFO - Dataset loaded: 39122 records
-2025-10-26 19:29:10 - INFO - Configuration: pr_comments
-2025-10-26 19:29:10 - INFO - Primary split: train
-2025-10-26 19:29:10 - INFO - Cache status: downloaded
-2025-10-26 19:29:10 - INFO - Comment fields: ['body']
+2025-10-26 20:46:05 - INFO - ✓ PHASE 4 for 'pr_comments' COMPLETE
+2025-10-26 20:46:05 - INFO - ======================================================================
+2025-10-26 20:46:05 - INFO - Dataset loaded: 39122 records
+2025-10-26 20:46:05 - INFO - Configuration: pr_comments
+2025-10-26 20:46:05 - INFO - Primary split: train
+2025-10-26 20:46:05 - INFO - Cache status: downloaded
+2025-10-26 20:46:05 - INFO - Comment fields: ['body']
+2025-10-26 20:46:07 - INFO - ======================================================================
+2025-10-26 20:46:07 - INFO - PHASE 5: DATA EXTRACTION (Question 2)
+2025-10-26 20:46:07 - INFO - ======================================================================
+2025-10-26 20:46:07 - INFO - Goal: Extract and categorize review comments per PR
+2025-10-26 20:46:07 - INFO - Categories: correctness, style, security, testing, other
+2025-10-26 20:46:07 - INFO - 
+2025-10-26 20:46:07 - INFO - 
+----------------------------------------------------------------------
+2025-10-26 20:46:07 - INFO - EXTRACTING PER-PR REVIEW METRICS
+2025-10-26 20:46:07 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:46:07 - INFO - Source datasets:
+2025-10-26 20:46:07 - INFO -   - pull_request: 33,596 PRs (metadata)
+2025-10-26 20:46:07 - INFO -   - pr_review_comments: 19,450 records
+2025-10-26 20:46:07 - INFO -   - pr_reviews: 28,875 records
+2025-10-26 20:46:07 - INFO -   - pr_comments: 39,122 records
+2025-10-26 20:46:07 - INFO -   Total comment records: 87,447
+2025-10-26 20:46:07 - INFO - 
+2025-10-26 20:46:07 - INFO - Step 1: Loading PR metadata...
+2025-10-26 20:46:07 - INFO -   Loaded 33,596 PRs
+2025-10-26 20:46:07 - INFO - 
+Step 2: Discovering schemas and aggregating comments...
+2025-10-26 20:46:07 - INFO -   This may take a minute for 87k records...
+2025-10-26 20:46:07 - INFO - 
+2025-10-26 20:46:07 - INFO -   Processing pr_review_comments...
+2025-10-26 20:46:07 - INFO -   pr_review_comments fields: ['id', 'pull_request_review_id', 'user', 'user_type', 'diff_hunk', 'path', 'position', 'original_position', 'commit_id', 'original_commit_id', 'body', 'pull_request_url', 'created_at', 'updated_at', 'in_reply_to_id']
+2025-10-26 20:46:07 - INFO -   → Using 'id' as PR identifier
+2025-10-26 20:46:08 - INFO -     Processed 5,000 / 19,450...
+2025-10-26 20:46:08 - INFO -     Processed 10,000 / 19,450...
+2025-10-26 20:46:08 - INFO -     Processed 15,000 / 19,450...
+2025-10-26 20:46:09 - INFO -   ✓ Processed 19,450 pr_review_comments
+2025-10-26 20:46:09 - INFO - 
+2025-10-26 20:46:09 - INFO -   Processing pr_reviews...
+2025-10-26 20:46:09 - INFO -   pr_reviews fields: ['id', 'pr_id', 'user', 'user_type', 'state', 'submitted_at', 'body']
+2025-10-26 20:46:09 - INFO -   → Using 'pr_id' as PR identifier
+2025-10-26 20:46:09 - INFO -     Processed 5,000 / 28,875...
+2025-10-26 20:46:09 - INFO -     Processed 10,000 / 28,875...
+2025-10-26 20:46:09 - INFO -     Processed 15,000 / 28,875...
+2025-10-26 20:46:10 - INFO -     Processed 20,000 / 28,875...
+2025-10-26 20:46:10 - INFO -     Processed 25,000 / 28,875...
+2025-10-26 20:46:10 - INFO -   ✓ Processed 28,875 pr_reviews
+2025-10-26 20:46:10 - INFO - 
+2025-10-26 20:46:10 - INFO -   Processing pr_comments...
+2025-10-26 20:46:10 - INFO -   pr_comments fields: ['id', 'pr_id', 'user', 'user_id', 'user_type', 'created_at', 'body']
+2025-10-26 20:46:10 - INFO -   → Using 'pr_id' as PR identifier
+2025-10-26 20:46:10 - INFO -     Processed 5,000 / 39,122...
+2025-10-26 20:46:10 - INFO -     Processed 10,000 / 39,122...
+2025-10-26 20:46:11 - INFO -     Processed 15,000 / 39,122...
+2025-10-26 20:46:11 - INFO -     Processed 20,000 / 39,122...
+2025-10-26 20:46:11 - INFO -     Processed 25,000 / 39,122...
+2025-10-26 20:46:11 - INFO -     Processed 30,000 / 39,122...
+2025-10-26 20:46:11 - INFO -     Processed 35,000 / 39,122...
+2025-10-26 20:46:12 - INFO -   ✓ Processed 39,122 pr_comments
+2025-10-26 20:46:12 - INFO -   ✓ Aggregated comments for 33,464 unique PRs
+2025-10-26 20:46:12 - INFO -   ✓ Total valid comments: 66,511
+2025-10-26 20:46:12 - INFO - 
+2025-10-26 20:46:12 - INFO - Step 3: Classifying comments into categories...
+2025-10-26 20:46:12 - INFO - Classifying comments into categories...
+2025-10-26 20:46:12 - INFO - Categories: correctness, style, security, testing, other
+2025-10-26 20:46:12 - INFO - 
+2025-10-26 20:46:12 - INFO - Total comments to classify: 66,511
+2025-10-26 20:46:12 - INFO - 
+2025-10-26 20:46:12 - INFO -   Classified 10,000 / 66,511 comments...
+2025-10-26 20:46:12 - INFO -   Classified 20,000 / 66,511 comments...
+2025-10-26 20:46:13 - INFO -   Classified 30,000 / 66,511 comments...
+2025-10-26 20:46:15 - INFO -   Classified 40,000 / 66,511 comments...
+2025-10-26 20:46:16 - INFO -   Classified 50,000 / 66,511 comments...
+2025-10-26 20:46:17 - INFO -   Classified 60,000 / 66,511 comments...
+2025-10-26 20:46:18 - INFO - ✓ Classified all 66,511 comments
+2025-10-26 20:46:18 - INFO - ✓ Processed 33,464 PRs
+2025-10-26 20:46:18 - INFO - 
+2025-10-26 20:46:18 - INFO - Category distribution across all comments:
+2025-10-26 20:46:18 - INFO -   Correctness: 19,186 (28.8%)
+2025-10-26 20:46:18 - INFO -   Style: 11,500 (17.3%)
+2025-10-26 20:46:18 - INFO -   Security: 2,814 (4.2%)
+2025-10-26 20:46:18 - INFO -   Testing: 12,688 (19.1%)
+2025-10-26 20:46:18 - INFO -   Other: 20,323 (30.6%)
+2025-10-26 20:46:18 - INFO - 
+2025-10-26 20:46:18 - INFO - Step 4: Building metrics DataFrame...
+2025-10-26 20:46:18 - INFO -   ✓ Created metrics DataFrame: 33,464 rows
+2025-10-26 20:46:18 - INFO - 
+Step 5: Determining primary category per PR...
+2025-10-26 20:46:18 - INFO -   ✓ Added primary_category column
+2025-10-26 20:46:18 - INFO - 
+Step 6: Merging with PR metadata...
+2025-10-26 20:46:18 - INFO -   ✓ Final DataFrame: 33,596 PRs total
+2025-10-26 20:46:18 - INFO -   ✓ PRs with comments: 14,015
+2025-10-26 20:46:18 - INFO -   ✓ PRs without comments: 19,581
+2025-10-26 20:46:18 - INFO - 
+======================================================================
+2025-10-26 20:46:18 - INFO - SUMMARY STATISTICS
+2025-10-26 20:46:18 - INFO - ======================================================================
+2025-10-26 20:46:18 - INFO - 
+Dataset Totals:
+2025-10-26 20:46:18 - INFO -   Total PRs: 33,596
+2025-10-26 20:46:18 - INFO -   PRs with review comments: 14,015
+2025-10-26 20:46:18 - INFO -   Total comments: 47,062
+2025-10-26 20:46:18 - INFO -   Average comments per PR: 3.4
+2025-10-26 20:46:18 - INFO - 
+Category Distribution (Across All Comments):
+2025-10-26 20:46:18 - INFO -   Correctness: 15,529 (33.0%)
+2025-10-26 20:46:18 - INFO -   Style: 8,919 (19.0%)
+2025-10-26 20:46:18 - INFO -   Security: 1,480 (3.1%)
+2025-10-26 20:46:18 - INFO -   Testing: 9,421 (20.0%)
+2025-10-26 20:46:18 - INFO -   Other: 11,713 (24.9%)
+2025-10-26 20:46:18 - INFO - 
+Primary Category Distribution (Per PR):
+2025-10-26 20:46:18 - INFO -   Correctness: 6,538 PRs (46.7%)
+2025-10-26 20:46:18 - INFO -   Style: 2,865 PRs (20.4%)
+2025-10-26 20:46:18 - INFO -   Other: 2,218 PRs (15.8%)
+2025-10-26 20:46:18 - INFO -   Testing: 2,155 PRs (15.4%)
+2025-10-26 20:46:18 - INFO -   Security: 239 PRs (1.7%)
+2025-10-26 20:46:18 - INFO - 
+2025-10-26 20:46:18 - INFO - ----------------------------------------------------------------------
+2025-10-26 20:46:18 - INFO - Saving results to CSV...
+2025-10-26 20:46:18 - INFO - ✓ Saved to: review_metrics.csv
+2025-10-26 20:46:18 - INFO - 
+✓ Extraction complete!
+2025-10-26 20:46:18 - INFO - 
+======================================================================
+2025-10-26 20:46:18 - INFO - ✓ PHASE 5 COMPLETE - Per-PR review metrics extracted
+2025-10-26 20:46:18 - INFO - ======================================================================
+2025-10-26 20:46:18 - INFO - Total PRs processed: 33,596
+2025-10-26 20:46:18 - INFO - PRs with review comments: 14,015
+2025-10-26 20:46:18 - INFO - Output file: review_metrics.csv
