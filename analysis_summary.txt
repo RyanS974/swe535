@@ -10,7 +10,7 @@ DATASET TOTALS (Across All PRs)
 Total PRs analyzed: 33,596
 Total additions: 69,337,968 lines
 Total deletions: 39,601,070 lines
-Total files touched: 442,618 files
+Total files touched: 575,913 files
 
 ----------------------------------------------------------------------
 PER-PR STATISTICS: ADDITIONS
@@ -50,18 +50,18 @@ Percentiles:
 PER-PR STATISTICS: FILES TOUCHED
 ----------------------------------------------------------------------
 
-Mean: 13.2 files
-Median: 2.0 files
-Std Dev: 44.4
+Mean: 17.1 files
+Median: 3.0 files
+Std Dev: 55.1
 Min: 0 files
 Max: 1,641 files
 
 Percentiles:
   25th: 1.0 files
-  50th: 2.0 files
-  75th: 7.0 files
-  90th: 22.0 files
-  95th: 58.0 files
+  50th: 3.0 files
+  75th: 8.0 files
+  90th: 30.0 files
+  95th: 80.0 files
 
 ----------------------------------------------------------------------
 PR SIZE DISTRIBUTION
